@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root prefHeight="100.0" prefWidth="495.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView id="ProductListImage" fx:id="productImage" fitHeight="90.0" fitWidth="114.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/images/product_1.jpg" />
+         </image></ImageView>
+      <Label id="ProductListHeadline" fx:id="productName" layoutX="132.0" layoutY="20.0" text="Rubrik" />
+      <Label id="ProductListText" fx:id="productInfo" layoutX="135.0" layoutY="42.0" text="Text" />
+      <Button id="ProductListInfoButton" layoutX="132.0" layoutY="63.0" mnemonicParsing="false" text="Mer info" />
+      <TextField id="ProductListTextField" layoutX="398.0" layoutY="29.0" prefHeight="26.0" prefWidth="34.0" promptText="1" />
+      <Button id="ProductListDecButton" layoutX="353.0" layoutY="29.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="34.0" text="-" />
+      <Button id="ProductListIncButton" layoutX="455.0" layoutY="29.0" mnemonicParsing="false" text="+" />
+      <Button id="ProductListAddToCartButton" layoutX="364.0" layoutY="63.0" mnemonicParsing="false" text="Lägg till i kassan" />
+   </children>
+</fx:root>
