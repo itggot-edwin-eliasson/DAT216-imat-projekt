@@ -54,5 +54,9 @@ public class Controller implements Initializable {
         }
     }
 
+    private void updateShoppingList(){
+
+    }
+
 
 }
