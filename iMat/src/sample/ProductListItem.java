@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
@@ -14,6 +15,8 @@ import java.io.IOException;
 public class ProductListItem extends AnchorPane {
     Controller parentController;
     Product product;
+    double amount = 1;
+    boolean inCart = false;
 
     @FXML private Label productName;
     @FXML private Label productInfo;
@@ -36,6 +39,17 @@ public class ProductListItem extends AnchorPane {
         productName.setText(product.getName());
         productInfo.setText(product.getPrice() + product.getUnit());
         productImage.setImage(parentController.dh.getFXImage(product));
+
+    }
+
+    @FXML public void addToCart(){
+        if(!inCart) {
+            parentController.addToShoppingCart(product, amount);
+            inCart = true;
+        }
+    }
+
+    @FXML protected void setAmount(){
 
     }
 }

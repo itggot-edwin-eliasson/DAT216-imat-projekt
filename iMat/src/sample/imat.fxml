@@ -27,6 +27,25 @@
             </AnchorPane>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
+                  <AnchorPane id="ShadowPanePopUp" prefHeight="374.0" prefWidth="667.0">
+                     <children>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="50.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="698.0">
+                                 <children>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </AnchorPane>
                   <AnchorPane prefHeight="592.0" prefWidth="838.0">
                      <children>
                         <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -121,25 +140,6 @@
                         </SplitPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane id="ShadowPanePopUp" prefHeight="374.0" prefWidth="667.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <AnchorPane layoutX="50.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="698.0">
-                                 <children>
-                                    <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                       </children>
-                                    </StackPane>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
                         <SplitPane dividerPositions="0.1971371170266198" layoutY="158.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -162,7 +162,7 @@
                                                 <FlowPane id="PrductListFlow" prefHeight="518.0" prefWidth="546.0" />
                                              </content>
                                           </ScrollPane>
-                                          <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
+                                          <ScrollPane fx:id="listView" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
                                              <content>
                                                 <FlowPane fx:id="productListFlowPane" prefHeight="521.0" prefWidth="534.0" />
                                              </content>
@@ -175,11 +175,11 @@
                                           <Image url="@resources/images/product_1.jpg" />
                                        </image>
                                     </ImageView>
-                                    <Button layoutX="233.0" layoutY="44.0" mnemonicParsing="false" text="Lista" AnchorPane.topAnchor="40.0" />
+                                    <Button layoutX="233.0" layoutY="44.0" mnemonicParsing="false" onAction="#selectListPane" text="Lista" AnchorPane.topAnchor="40.0" />
                                     <Button layoutX="295.0" layoutY="40.0" mnemonicParsing="false" text="Bilder" AnchorPane.topAnchor="40.0" />
-                                    <ScrollPane hbarPolicy="NEVER" layoutX="539.0" prefHeight="529.0" prefWidth="102.0">
+                                    <ScrollPane layoutX="539.0" prefHeight="529.0" prefWidth="102.0">
                                        <content>
-                                          <FlowPane prefHeight="534.0" prefWidth="102.0" />
+                                          <FlowPane fx:id="shoppingCartFlowPane" prefHeight="534.0" prefWidth="102.0" />
                                        </content>
                                     </ScrollPane>
                                     <Button layoutX="555.0" layoutY="542.0" mnemonicParsing="false" text="Till kassan" />

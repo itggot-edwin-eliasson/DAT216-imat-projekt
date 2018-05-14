@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import se.chalmers.cse.dat216.project.*;
@@ -18,9 +19,12 @@ public class Controller implements Initializable {
 
     IMatDataHandler dh = IMatDataHandler.getInstance();
     ProductCategory[] pc = ProductCategory.values();
+    ShoppingCart sc = dh.getShoppingCart();
 
     @FXML private FlowPane categoryMenu;
     @FXML private FlowPane productListFlowPane;
+    @FXML private FlowPane shoppingCartFlowPane;
+    @FXML private ScrollPane listView;
 
     private Map<String, ProductListItem> productListItemMap = new HashMap<String, ProductListItem>();
 
@@ -31,6 +35,7 @@ public class Controller implements Initializable {
             ProductListItem item = new ProductListItem(product, this);
             productListItemMap.put(product.getName(), item);
         }
+
         updateProductList();
         setCategory();
     }
@@ -55,8 +60,26 @@ public class Controller implements Initializable {
     }
 
     private void updateShoppingList(){
+        List<ShoppingItem> shoppingList = sc.getItems();
+        shoppingCartFlowPane.getChildren().clear();
+        for(int i = 0; i < shoppingList.size(); i++){
+            ShoppingCartListItem item = new ShoppingCartListItem(shoppingList.get(i), this);
+            shoppingCartFlowPane.getChildren().add(item);
+        }
 
     }
+
+    public void addToShoppingCart(Product product, double amount){
+        ShoppingItem shoppingItem = new ShoppingItem(product, amount);
+        sc.addItem(shoppingItem);
+        updateShoppingList();
+    }
+
+    @FXML
+    private void selectListPane(){
+        listView.toFront();
+    }
+
 
 
 }
