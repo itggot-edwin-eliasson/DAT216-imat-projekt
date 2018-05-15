@@ -35,6 +35,7 @@ public class Controller implements Initializable {
     @FXML private AnchorPane registerEnd;
     @FXML private AnchorPane registerRegisterPane;
     @FXML private AnchorPane registerEditInformation;
+    @FXML private Label totalPrice;
 
 
     private Map<String, ProductListItem> productListItemMap = new HashMap<String, ProductListItem>();
@@ -69,7 +70,8 @@ public class Controller implements Initializable {
     private void setCategory() {
         categoryMenu.getChildren().clear();
         for(int i = 0; i < pc.length; i++){
-            CategoryListItem item = new CategoryListItem(tr.translate(pc[i]), this);
+            String c = tr.translate(pc[i]);
+            CategoryListItem item = new CategoryListItem(c, this);
             categoryMenu.getChildren().add(item);
         }
     }
@@ -91,6 +93,7 @@ public class Controller implements Initializable {
             ShoppingCartListItem item = new ShoppingCartListItem(shoppingList.get(i), this);
             shoppingCartPreview.getChildren().add(item);
         }
+        totalPrice.setText(sc.getTotal() + " kr");
 
     }
 
@@ -144,6 +147,11 @@ public class Controller implements Initializable {
     @FXML
     private void toRegisterEnd(){
         registerEnd.toFront();
+    }
+
+    @FXML
+    private void toRegisterStart(){
+        registerStart.toFront();
     }
 
 }

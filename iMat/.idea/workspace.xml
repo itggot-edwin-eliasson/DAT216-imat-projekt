@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/sample/Translator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iMat/sample/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iMat/sample/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iMat/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iMat/sample/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iMat/sample/imat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iMat/sample/imat.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iMat/sample/sample.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/iMat/sample/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/iMat/sample/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/CategoryListItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/CategoryListItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/category-listitem.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/category-listitem.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/imat.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/imat.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/sample.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/style.css" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -84,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="71" column="74" selection-start-line="71" selection-start-column="74" selection-end-line="71" selection-end-column="74" />
+            <state relative-caret-position="236">
+              <caret line="73" column="58" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1068#1093#0" expanded="true" />
@@ -104,14 +94,11 @@
                 <element signature="e#4199#4200#0" expanded="true" />
                 <element signature="e#4240#4241#0" expanded="true" />
                 <element signature="e#4260#4261#0" expanded="true" />
+                <element signature="e#4428#4429#0" expanded="true" />
+                <element signature="e#4458#4459#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="iMat.iml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/iMat.iml">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
@@ -140,7 +127,7 @@
           <provider editor-type-id="JavaFX-Scene-Builder" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="463">
-              <caret line="197" lean-forward="true" selection-start-line="197" selection-end-line="197" />
+              <caret line="199" lean-forward="true" selection-start-line="199" selection-end-line="199" />
             </state>
           </provider>
         </entry>
@@ -160,11 +147,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="CategoryListItem.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CategoryListItem.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/CategoryListItem.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="87">
-              <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+              <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -242,8 +229,8 @@
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
         <option value="$PROJECT_DIR$/src/sample/style.css" />
         <option value="$PROJECT_DIR$/src/sample/Translator.java" />
-        <option value="$PROJECT_DIR$/src/sample/Controller.java" />
         <option value="$PROJECT_DIR$/src/sample/CategoryListItem.java" />
+        <option value="$PROJECT_DIR$/src/sample/Controller.java" />
       </list>
     </option>
   </component>
@@ -481,12 +468,12 @@
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.32900944" />
       <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32900944" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32900944" />
       <window_info anchor="bottom" id="Version Control" order="12" />
       <window_info anchor="bottom" id="Terminal" order="13" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.82073814" visible="true" weight="0.24930556" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.82073814" visible="true" weight="0.24930556" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="3" />
@@ -561,6 +548,8 @@
             <element signature="e#4199#4200#0" expanded="true" />
             <element signature="e#4240#4241#0" expanded="true" />
             <element signature="e#4260#4261#0" expanded="true" />
+            <element signature="e#4428#4429#0" expanded="true" />
+            <element signature="e#4458#4459#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -652,6 +641,8 @@
             <element signature="e#4199#4200#0" expanded="true" />
             <element signature="e#4240#4241#0" expanded="true" />
             <element signature="e#4260#4261#0" expanded="true" />
+            <element signature="e#4428#4429#0" expanded="true" />
+            <element signature="e#4458#4459#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -709,6 +700,8 @@
             <element signature="e#4199#4200#0" expanded="true" />
             <element signature="e#4240#4241#0" expanded="true" />
             <element signature="e#4260#4261#0" expanded="true" />
+            <element signature="e#4428#4429#0" expanded="true" />
+            <element signature="e#4458#4459#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -742,6 +735,8 @@
             <element signature="e#4199#4200#0" expanded="true" />
             <element signature="e#4240#4241#0" expanded="true" />
             <element signature="e#4260#4261#0" expanded="true" />
+            <element signature="e#4428#4429#0" expanded="true" />
+            <element signature="e#4458#4459#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -817,6 +812,8 @@
             <element signature="e#4199#4200#0" expanded="true" />
             <element signature="e#4240#4241#0" expanded="true" />
             <element signature="e#4260#4261#0" expanded="true" />
+            <element signature="e#4428#4429#0" expanded="true" />
+            <element signature="e#4458#4459#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -941,7 +938,7 @@
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="463">
-          <caret line="197" lean-forward="true" selection-start-line="197" selection-end-line="197" />
+          <caret line="199" lean-forward="true" selection-start-line="199" selection-end-line="199" />
         </state>
       </provider>
     </entry>
@@ -971,9 +968,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iMat.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -998,10 +992,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/CategoryListItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iMat.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="71" column="74" selection-start-line="71" selection-start-column="74" selection-end-line="71" selection-end-column="74" />
+        <state relative-caret-position="236">
+          <caret line="73" column="58" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1068#1093#0" expanded="true" />
@@ -1017,16 +1028,8 @@
             <element signature="e#4199#4200#0" expanded="true" />
             <element signature="e#4240#4241#0" expanded="true" />
             <element signature="e#4260#4261#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/CategoryListItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#4428#4429#0" expanded="true" />
+            <element signature="e#4458#4459#0" expanded="true" />
           </folding>
         </state>
       </provider>
