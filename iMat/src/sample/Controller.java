@@ -78,6 +78,16 @@ public class Controller implements Initializable {
 
     }
 
+    private void updateShoppingView(){
+        List<ShoppingItem> shoppingList = sc.getItems();
+        shoppingCartPreview.getChildren().clear();
+        for(int i = 0; i < shoppingList.size(); i++){
+            ShoppingCartListItem item = new ShoppingCartListItem(shoppingList.get(i), this);
+            shoppingCartPreview.getChildren().add(item);
+        }
+
+    }
+
     public void addToShoppingCart(Product product, double amount){
         boolean contains = false;
         for(int i = 0; i < sc.getItems().size(); i++){
@@ -96,6 +106,7 @@ public class Controller implements Initializable {
     public void removeFromShoppingCart(ShoppingItem item){
         sc.removeItem(item);
         updateShoppingList();
+        updateShoppingView();
     }
 
     @FXML
