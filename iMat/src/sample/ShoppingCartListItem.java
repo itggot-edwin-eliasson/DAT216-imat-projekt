@@ -3,6 +3,7 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import se.chalmers.cse.dat216.project.ShoppingItem;
 
@@ -14,6 +15,7 @@ public class ShoppingCartListItem extends AnchorPane {
     Controller parentController;
 
     @FXML private Label productName;
+    @FXML private TextField itemAmount;
 
     public ShoppingCartListItem(ShoppingItem shoppingItem, Controller controller) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("shoppingcart-listitem.fxml"));
@@ -30,5 +32,11 @@ public class ShoppingCartListItem extends AnchorPane {
         this.parentController = controller;
 
         productName.setText(shoppingItem.getProduct().getName());
+        itemAmount.setText((int)shoppingItem.getAmount() + "");
+    }
+
+    @FXML
+    private void removeItem(){
+        parentController.removeFromShoppingCart(shoppingItem);
     }
 }

@@ -20,11 +20,16 @@ public class Controller implements Initializable {
     IMatDataHandler dh = IMatDataHandler.getInstance();
     ProductCategory[] pc = ProductCategory.values();
     ShoppingCart sc = dh.getShoppingCart();
+    User user;
 
     @FXML private FlowPane categoryMenu;
     @FXML private FlowPane productListFlowPane;
     @FXML private FlowPane shoppingCartFlowPane;
+    @FXML private FlowPane shoppingCartPreview;
     @FXML private ScrollPane listView;
+    @FXML private AnchorPane registerPane;
+    @FXML private AnchorPane storePane;
+    @FXML private Label userName;
 
     private Map<String, ProductListItem> productListItemMap = new HashMap<String, ProductListItem>();
 
@@ -38,6 +43,11 @@ public class Controller implements Initializable {
 
         updateProductList();
         setCategory();
+        if(user == null){
+            userName.setText("");
+        } else {
+            userName.setText(user.getUserName());
+        }
     }
 
     private void updateProductList(){
@@ -47,7 +57,6 @@ public class Controller implements Initializable {
         for(int i = 0; i < products.size(); i++){
             item = productListItemMap.get(products.get(i).getName());
             productListFlowPane.getChildren().add(item);
-
         }
     }
 
@@ -70,14 +79,38 @@ public class Controller implements Initializable {
     }
 
     public void addToShoppingCart(Product product, double amount){
-        ShoppingItem shoppingItem = new ShoppingItem(product, amount);
-        sc.addItem(shoppingItem);
+        boolean contains = false;
+        for(int i = 0; i < sc.getItems().size(); i++){
+            if(product.getName() == sc.getItems().get(i).getProduct().getName()){
+                contains = true;
+                break;
+            }
+        }
+        if(!contains) {
+            ShoppingItem shoppingItem = new ShoppingItem(product, amount);
+            sc.addItem(shoppingItem);
+            updateShoppingList();
+        }
+    }
+
+    public void removeFromShoppingCart(ShoppingItem item){
+        sc.removeItem(item);
         updateShoppingList();
     }
 
     @FXML
     private void selectListPane(){
         listView.toFront();
+    }
+
+    @FXML
+    private void toRegister(){
+        registerPane.toFront();
+    }
+
+    @FXML
+    private void toStore(){
+        storePane.toFront();
     }
 
 

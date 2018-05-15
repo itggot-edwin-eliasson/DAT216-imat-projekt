@@ -20,7 +20,7 @@
           <AnchorPane id="HeaderPane" maxHeight="100.0" minHeight="100.0" minWidth="600.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <Label layoutX="30.0" layoutY="22.0" prefHeight="42.0" prefWidth="102.0" styleClass="logo" text="iMAT" />
-                  <Label id="HeaderNameLabel" layoutX="704.0" layoutY="26.0" text="Namn Namn" />
+                  <Label id="HeaderNameLabel" fx:id="userName" layoutX="704.0" layoutY="26.0" text="Namn Namn" />
                   <Label id="HeaderLogInLabel" layoutX="704.0" layoutY="57.0" text="Logga in" />
                   <BreadCrumbBar id="HeaderBreadcrumbBar" layoutX="14.0" layoutY="75.0" prefHeight="18.0" prefWidth="135.0" style="-fx-background-color: #FF00FF;" AnchorPane.leftAnchor="14.0" />
                </children>
@@ -46,7 +46,7 @@
                         </StackPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="592.0" prefWidth="838.0">
+                  <AnchorPane fx:id="registerPane" prefHeight="592.0" prefWidth="838.0">
                      <children>
                         <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <items>
@@ -57,12 +57,12 @@
                                           <AnchorPane maxHeight="600.0" maxWidth="500.0" minHeight="586.0" minWidth="390.0" prefHeight="586.0" prefWidth="390.0">
                                              <children>
                                                 <Label layoutX="146.0" layoutY="14.0" text="Varukorg" />
-                                                <ScrollPane prefHeight="462.0" prefWidth="394.0" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                                <ScrollPane hbarPolicy="NEVER" prefHeight="462.0" prefWidth="394.0" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                                    <content>
-                                                      <FlowPane prefHeight="458.0" prefWidth="394.0" />
+                                                      <FlowPane fx:id="shoppingCartPreview" prefHeight="458.0" prefWidth="394.0" />
                                                    </content>
                                                 </ScrollPane>
-                                                <Button layoutX="14.0" layoutY="540.0" mnemonicParsing="false" text="Tillbaka till butik" />
+                                                <Button layoutX="14.0" layoutY="540.0" mnemonicParsing="false" onAction="#toStore" text="Tillbaka till butik" />
                                                 <TextField editable="false" layoutX="279.0" layoutY="527.0" prefHeight="26.0" prefWidth="102.0" promptText="Pengar" />
                                                 <Label layoutX="227.0" layoutY="531.0" text="Summa:" />
                                              </children>
@@ -140,7 +140,7 @@
                         </SplitPane>
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <AnchorPane fx:id="storePane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
                         <SplitPane dividerPositions="0.1971371170266198" layoutY="158.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <items>
@@ -182,7 +182,7 @@
                                           <FlowPane fx:id="shoppingCartFlowPane" prefHeight="534.0" prefWidth="102.0" />
                                        </content>
                                     </ScrollPane>
-                                    <Button layoutX="555.0" layoutY="542.0" mnemonicParsing="false" text="Till kassan" />
+                                    <Button layoutX="555.0" layoutY="542.0" mnemonicParsing="false" onAction="#toRegister" text="Till kassan" />
                                  </children>
                               </AnchorPane>
                           </items>
