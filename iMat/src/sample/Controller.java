@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import org.controlsfx.control.BreadCrumbBar;
 import se.chalmers.cse.dat216.project.*;
 
 import java.net.URL;
@@ -16,18 +18,27 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
+    private BreadCrumbBar<String> bc;
+    TreeItem<String> root = new TreeItem<String>("Root");
+
+    TreeItem<String> item1 = new TreeItem<String>("Item 1");
+    TreeItem<String> item11 = new TreeItem<String>("Item 1.1");
+    TreeItem<String> item12 = new TreeItem<String>("Item 1.2");
+
     IMatDataHandler dh = IMatDataHandler.getInstance();
     ProductCategory[] pc = ProductCategory.values();
 
-    @FXML private FlowPane categoryMenu;
-    @FXML private FlowPane productListFlowPane;
+    @FXML
+    private FlowPane categoryMenu;
+    @FXML
+    private FlowPane productListFlowPane;
 
     private Map<String, ProductListItem> productListItemMap = new HashMap<String, ProductListItem>();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        for(Product product : dh.getProducts()){
+        for (Product product : dh.getProducts()) {
             ProductListItem item = new ProductListItem(product, this);
             productListItemMap.put(product.getName(), item);
         }
@@ -35,11 +46,11 @@ public class Controller implements Initializable {
         setCategory();
     }
 
-    private void updateProductList(){
+    private void updateProductList() {
         productListFlowPane.getChildren().clear();
         List<Product> products = dh.getProducts();
         ProductListItem item;
-        for(int i = 0; i < products.size(); i++){
+        for (int i = 0; i < products.size(); i++) {
             item = productListItemMap.get(products.get(i).getName());
             productListFlowPane.getChildren().add(item);
 
@@ -48,7 +59,7 @@ public class Controller implements Initializable {
 
     private void setCategory() {
         categoryMenu.getChildren().clear();
-        for(int i = 0; i < pc.length; i++){
+        for (int i = 0; i < pc.length; i++) {
             CategoryListItem item = new CategoryListItem(pc[i], this);
             categoryMenu.getChildren().add(item);
         }

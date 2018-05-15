@@ -169,14 +169,14 @@
                                           </ScrollPane>
                                        </children>
                                     </StackPane>
-                                    <TextField id="ListFoodSearchField" layoutX="233.0" layoutY="8.0" promptText="Sök" />
-                                    <ImageView id="ListFoodSearchIcon" fitHeight="20.0" fitWidth="20.0" layoutX="389.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                    <TextField id="ListFoodSearchField" layoutX="199.0" layoutY="8.0" promptText="Sök" />
+                                    <ImageView id="ListFoodSearchIcon" fitHeight="20.0" fitWidth="20.0" layoutX="356.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@resources/images/product_1.jpg" />
                                        </image>
                                     </ImageView>
                                     <Button layoutX="233.0" layoutY="44.0" mnemonicParsing="false" text="Lista" AnchorPane.topAnchor="40.0" />
-                                    <Button layoutX="295.0" layoutY="40.0" mnemonicParsing="false" text="Bilder" AnchorPane.topAnchor="40.0" />
+                                    <Button layoutX="273.0" layoutY="40.0" mnemonicParsing="false" text="Bilder" AnchorPane.topAnchor="40.0" />
                                     <ScrollPane hbarPolicy="NEVER" layoutX="539.0" prefHeight="529.0" prefWidth="102.0" AnchorPane.bottomAnchor="60.799999999999955" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <content>
                                           <FlowPane prefHeight="534.0" prefWidth="102.0" />
