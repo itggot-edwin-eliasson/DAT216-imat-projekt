@@ -9,12 +9,12 @@ import java.io.IOException;
 
 public class CategoryListItem extends AnchorPane {
 
-    Enum category;
+    String category;
     Controller parentController;
 
     @FXML private Label categoryName;
 
-    public CategoryListItem(Enum category, Controller controller) {
+    public CategoryListItem(String category, Controller controller) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("category-listitem.fxml"));
         fxmlLoader.setRoot(this);
@@ -29,6 +29,6 @@ public class CategoryListItem extends AnchorPane {
         this.category = category;
         this.parentController = controller;
 
-        categoryName.setText(category.name());
+        categoryName.setText(category);
     }
 }

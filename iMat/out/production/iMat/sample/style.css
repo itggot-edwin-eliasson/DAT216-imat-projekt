@@ -2,5 +2,10 @@
 
 .logo {
     -fx-font-family: "Poiret One", cursive;
-    -fx-font-size: 30px;
+    -fx-font-size: 40px;
+}
+
+.normal-text {
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 20px;
 }

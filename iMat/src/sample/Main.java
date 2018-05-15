@@ -18,8 +18,9 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("imat.fxml"), bundle);
 
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 1000, 800);
         scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Poiret+One");
+        scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Montserrat");
 
         stage.setTitle(bundle.getString("application.name"));
         stage.setScene(scene);

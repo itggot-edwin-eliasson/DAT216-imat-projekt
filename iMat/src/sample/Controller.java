@@ -20,6 +20,7 @@ public class Controller implements Initializable {
     IMatDataHandler dh = IMatDataHandler.getInstance();
     ProductCategory[] pc = ProductCategory.values();
     ShoppingCart sc = dh.getShoppingCart();
+    Translator tr = new Translator();
     User user;
 
     @FXML private FlowPane categoryMenu;
@@ -30,6 +31,11 @@ public class Controller implements Initializable {
     @FXML private AnchorPane registerPane;
     @FXML private AnchorPane storePane;
     @FXML private Label userName;
+    @FXML private AnchorPane registerStart;
+    @FXML private AnchorPane registerEnd;
+    @FXML private AnchorPane registerRegisterPane;
+    @FXML private AnchorPane registerEditInformation;
+
 
     private Map<String, ProductListItem> productListItemMap = new HashMap<String, ProductListItem>();
 
@@ -63,7 +69,7 @@ public class Controller implements Initializable {
     private void setCategory() {
         categoryMenu.getChildren().clear();
         for(int i = 0; i < pc.length; i++){
-            CategoryListItem item = new CategoryListItem(pc[i], this);
+            CategoryListItem item = new CategoryListItem(tr.translate(pc[i]), this);
             categoryMenu.getChildren().add(item);
         }
     }
@@ -100,6 +106,7 @@ public class Controller implements Initializable {
             ShoppingItem shoppingItem = new ShoppingItem(product, amount);
             sc.addItem(shoppingItem);
             updateShoppingList();
+            updateShoppingView();
         }
     }
 
@@ -124,6 +131,19 @@ public class Controller implements Initializable {
         storePane.toFront();
     }
 
+    @FXML
+    private void toRegisterLogin(){
+        registerEditInformation.toFront();
+    }
 
+    @FXML
+    private void toRegisterRegister(){
+        registerRegisterPane.toFront();
+    }
+
+    @FXML
+    private void toRegisterEnd(){
+        registerEnd.toFront();
+    }
 
 }
