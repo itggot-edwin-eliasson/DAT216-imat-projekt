@@ -6,9 +6,9 @@
 <fx:root prefHeight="65.0" prefWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="orderDate" layoutX="14.0" layoutY="24.0" text="Date goes here" />
-      <Label layoutX="383.0" layoutY="24.0" text="Pris:" />
-      <Label fx:id="orderPrice" layoutX="412.0" layoutY="24.0" text="Price goes here" />
-      <Label fx:id="orderFigure" layoutX="521.0" layoutY="24.0" text="nån &gt; figur" />
-      <Label fx:id="orderNumber" layoutX="123.0" layoutY="24.0" text="Ordernummer" />
+      <Label layoutX="452.0" layoutY="24.0" text="Pris:" />
+      <Label fx:id="orderPrice" layoutX="490.0" layoutY="24.0" text="Price goes here" />
+      <Label fx:id="orderNumber" layoutX="277.0" layoutY="24.0" text="Ordernummer" />
+      <Label layoutX="250.0" layoutY="24.0" text="Nr:" />
    </children>
 </fx:root>

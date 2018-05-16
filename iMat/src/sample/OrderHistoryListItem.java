@@ -35,7 +35,7 @@ public class OrderHistoryListItem extends AnchorPane {
         this.parentController = controller;
 
         orderDate.setText(this.order.getDate() + "");
-        orderNumber.setText(this.order.getDate() + "");
+        orderNumber.setText(this.order.getOrderNumber() + "");
         double price = 0;
         List<ShoppingItem> items = this.order.getItems();
         for(int i = 0; i < items.size(); i++){

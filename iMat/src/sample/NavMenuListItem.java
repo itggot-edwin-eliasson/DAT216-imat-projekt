@@ -33,7 +33,6 @@ public class NavMenuListItem extends AnchorPane {
 
     @FXML
     private void goTo(){
-        System.out.println(menuName);
         parentController.goTo(menuName);
     }
 }

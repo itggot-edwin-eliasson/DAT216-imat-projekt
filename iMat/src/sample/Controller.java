@@ -162,13 +162,18 @@ public class Controller implements Initializable {
     public void goTo(String navMenuName){
         switch (navMenuName){
             case "Startsida":
+                updateProductList();
                 storePane.toFront();
                 listView.toFront();
+                break;
             case "Min sida":
+                break;
 
             case "Orderhistorik":
+                setOrderHistory();
                 storePane.toFront();
                 orderHistoryPane.toFront();
+                break;
         }
     }
 
@@ -208,7 +213,17 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void placeOrder(){
-        dh.placeOrder();
+    private void placeOrder() {
+        if (sc.getItems().size() > 0){
+            dh.placeOrder();
+            updateShoppingView();
+            updateShoppingList();
+            List<Order> l = dh.getOrders();
+            for (int i = 0; i < l.size(); i++) {
+                for (int j = 0; j < l.get(i).getItems().size(); j++) {
+                    System.out.println(l.get(i).getItems().get(j).getProduct().getName());
+                }
+            }
+        }
     }
 }
