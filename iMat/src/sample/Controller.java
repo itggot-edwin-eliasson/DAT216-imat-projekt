@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.concurrent.Flow;
 
 public class Controller implements Initializable {
 
@@ -36,6 +37,10 @@ public class Controller implements Initializable {
     @FXML private AnchorPane registerRegisterPane;
     @FXML private AnchorPane registerEditInformation;
     @FXML private Label totalPrice;
+    @FXML private FlowPane navMenu;
+    @FXML private FlowPane orderHistoryFlowPane;
+    @FXML private AnchorPane orderHistoryPane;
+
 
 
     private Map<String, ProductListItem> productListItemMap = new HashMap<String, ProductListItem>();
@@ -50,11 +55,14 @@ public class Controller implements Initializable {
 
         updateProductList();
         setCategory();
+        setNavMenu();
         if(user == null){
             userName.setText("");
         } else {
             userName.setText(user.getUserName());
         }
+        registerStart.toFront();
+        storePane.toFront();
     }
 
     private void updateProductList(){
@@ -67,12 +75,39 @@ public class Controller implements Initializable {
         }
     }
 
+    private void updateProductList(List<Product> products){
+        productListFlowPane.getChildren().clear();
+        ProductListItem item;
+        for(int i = 0; i < products.size(); i++){
+            item = productListItemMap.get(products.get(i).getName());
+            productListFlowPane.getChildren().add(item);
+        }
+    }
+
     private void setCategory() {
         categoryMenu.getChildren().clear();
         for(int i = 0; i < pc.length; i++){
-            String c = tr.translate(pc[i]);
-            CategoryListItem item = new CategoryListItem(c, this);
+            CategoryListItem item = new CategoryListItem(pc[i], this);
             categoryMenu.getChildren().add(item);
+        }
+    }
+
+    private void setNavMenu(){
+        navMenu.getChildren().clear();
+        NavMenuListItem item = new NavMenuListItem("Startsida", this);
+        navMenu.getChildren().add(item);
+        item = new NavMenuListItem("Min sida", this);
+        navMenu.getChildren().add(item);
+        item = new NavMenuListItem("Orderhistorik", this);
+        navMenu.getChildren().add(item);
+    }
+
+    private void setOrderHistory(){
+        orderHistoryFlowPane.getChildren().clear();
+        OrderHistoryListItem item;
+        for(int i = 0; i < dh.getOrders().size(); i++){
+            item = new OrderHistoryListItem(dh.getOrders().get(i), this);
+            orderHistoryFlowPane.getChildren().add(item);
         }
     }
 
@@ -119,6 +154,24 @@ public class Controller implements Initializable {
         updateShoppingView();
     }
 
+    public void getCategory(ProductCategory category){
+        listView.toFront();
+        updateProductList(dh.getProducts(category));
+    }
+
+    public void goTo(String navMenuName){
+        switch (navMenuName){
+            case "Startsida":
+                storePane.toFront();
+                listView.toFront();
+            case "Min sida":
+
+            case "Orderhistorik":
+                storePane.toFront();
+                orderHistoryPane.toFront();
+        }
+    }
+
     @FXML
     private void selectListPane(){
         listView.toFront();
@@ -135,7 +188,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void toRegisterLogin(){
+    private void toRegisterInformation(){
         registerEditInformation.toFront();
     }
 
@@ -154,4 +207,8 @@ public class Controller implements Initializable {
         registerStart.toFront();
     }
 
+    @FXML
+    private void placeOrder(){
+        dh.placeOrder();
+    }
 }

@@ -4,17 +4,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import se.chalmers.cse.dat216.project.ProductCategory;
 
 import java.io.IOException;
 
 public class CategoryListItem extends AnchorPane {
 
-    String category;
+    ProductCategory category;
     Controller parentController;
+    Translator tr = new Translator();
 
     @FXML private Label categoryName;
 
-    public CategoryListItem(String category, Controller controller) {
+    public CategoryListItem(ProductCategory category, Controller controller) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("category-listitem.fxml"));
         fxmlLoader.setRoot(this);
@@ -29,6 +31,11 @@ public class CategoryListItem extends AnchorPane {
         this.category = category;
         this.parentController = controller;
 
-        categoryName.setText(category);
+        categoryName.setText(tr.translate(category));
+    }
+
+    @FXML
+    private void searchCategory(){
+        parentController.getCategory(category);
     }
 }
