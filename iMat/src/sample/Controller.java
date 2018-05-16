@@ -1,10 +1,11 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import se.chalmers.cse.dat216.project.*;
@@ -23,6 +24,8 @@ public class Controller implements Initializable {
     ShoppingCart sc = dh.getShoppingCart();
     Translator tr = new Translator();
     User user;
+    String username;
+    String password;
 
     @FXML private FlowPane categoryMenu;
     @FXML private FlowPane productListFlowPane;
@@ -40,6 +43,20 @@ public class Controller implements Initializable {
     @FXML private FlowPane navMenu;
     @FXML private FlowPane orderHistoryFlowPane;
     @FXML private AnchorPane orderHistoryPane;
+    @FXML private AnchorPane loginPane;
+    @FXML private SplitPane storeSplitPane;
+    @FXML private AnchorPane productInfo;
+    @FXML private Label productInfoName;
+    @FXML private ImageView productInfoImage;
+
+    @FXML private Label usernameLoginError;
+    @FXML private Label passwordLoginError;
+    @FXML private TextField usernameLoginDialogField;
+    @FXML private PasswordField passwordLoginDialogField;
+    @FXML private AnchorPane loginDialog;
+    @FXML private AnchorPane registerDialog;
+    @FXML private TextField usernameRegisterDialogField;
+    @FXML private PasswordField passwordRegisterDialogField;
 
 
 
@@ -56,6 +73,10 @@ public class Controller implements Initializable {
         updateProductList();
         setCategory();
         setNavMenu();
+        usernameLogin();
+        passwordLogin();
+        usernameRegister();
+        passwordRegister();
         if(user == null){
             userName.setText("");
         } else {
@@ -132,6 +153,78 @@ public class Controller implements Initializable {
 
     }
 
+    private void usernameLogin(){
+        usernameLoginDialogField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+                if(newValue){
+                    //focusgained - do nothing
+                }
+                else{
+                    username = usernameLoginDialogField.getText();
+
+                }
+
+            }
+        });
+    }
+
+    private void passwordLogin(){
+        passwordLoginDialogField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+                if(newValue){
+                    //focusgained - do nothing
+                }
+                else{
+                    password = passwordLoginDialogField.getText();
+
+                }
+
+            }
+        });
+    }
+
+    private void usernameRegister(){
+        usernameRegisterDialogField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+                if(newValue){
+                    //focusgained - do nothing
+                }
+                else{
+                    username = usernameRegisterDialogField.getText();
+
+                }
+
+            }
+        });
+    }
+
+    private void passwordRegister(){
+        passwordRegisterDialogField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+                if(newValue){
+                    //focusgained - do nothing
+                }
+                else{
+                    password = passwordRegisterDialogField.getText();
+
+                }
+
+            }
+        });
+    }
+
     public void addToShoppingCart(Product product, double amount){
         boolean contains = false;
         for(int i = 0; i < sc.getItems().size(); i++){
@@ -177,6 +270,12 @@ public class Controller implements Initializable {
         }
     }
 
+    public void showProductInfo(Product product){
+        productInfo.toFront();
+        productInfoName.setText(product.getName());
+        productInfoImage.setImage(dh.getFXImage(product));
+    }
+
     @FXML
     private void selectListPane(){
         listView.toFront();
@@ -218,12 +317,60 @@ public class Controller implements Initializable {
             dh.placeOrder();
             updateShoppingView();
             updateShoppingList();
-            List<Order> l = dh.getOrders();
-            for (int i = 0; i < l.size(); i++) {
-                for (int j = 0; j < l.get(i).getItems().size(); j++) {
-                    System.out.println(l.get(i).getItems().get(j).getProduct().getName());
-                }
-            }
         }
+    }
+
+    @FXML
+    private void login(){
+        User tmpUser = dh.getUser();
+        if(username.equals(tmpUser.getUserName())){
+            if(password.equals(tmpUser.getPassword())){
+                user = tmpUser;
+                user.setPassword(password);
+                user.setUserName(username);
+            }else{
+                passwordLoginDialogField.focusedProperty();
+                passwordLoginError.setText("Wrong password");
+            }
+        }else{
+            usernameLoginDialogField.focusedProperty();
+            usernameLoginError.setText("Wrong username");
+        }
+    }
+
+    @FXML
+    private void register(){
+        if (!username.equals("") && !password.equals("")) {
+            user = dh.getUser();
+            user.setUserName(username);
+            user.setPassword(password);
+            loginPane.toBack();
+            userName.setText(user.getUserName());
+        }
+    }
+
+    @FXML
+    private void toLogin(){
+        if(user == null) {
+            usernameLoginError.setText("");
+            passwordLoginError.setText("");
+            loginPane.toFront();
+            loginDialog.toFront();
+        }
+    }
+
+    @FXML
+    private void toRegisterWindow(){
+        registerDialog.toFront();
+    }
+
+    @FXML
+    private void exitProductInfo(){
+        productInfo.toBack();
+    }
+
+    @FXML
+    private void closeLogin(){
+        loginPane.toBack();
     }
 }

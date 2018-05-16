@@ -15,7 +15,7 @@
          </image></ImageView>
       <Label id="ProductListHeadline" fx:id="productName" layoutX="132.0" layoutY="20.0" text="Rubrik" />
       <Label id="ProductListText" fx:id="productInfo" layoutX="135.0" layoutY="42.0" text="Text" />
-      <Button id="ProductListInfoButton" layoutX="132.0" layoutY="63.0" mnemonicParsing="false" text="Mer info" />
+      <Button id="ProductListInfoButton" layoutX="132.0" layoutY="63.0" mnemonicParsing="false" onAction="#showProductInfo" text="Mer info" />
       <TextField id="ProductListTextField" fx:id="productAmount" layoutX="398.0" layoutY="29.0" prefHeight="26.0" prefWidth="34.0" promptText="1" />
       <Button id="ProductListDecButton" layoutX="353.0" layoutY="29.0" mnemonicParsing="false" onAction="#decAmount" prefHeight="26.0" prefWidth="34.0" text="-" />
       <Button id="ProductListIncButton" layoutX="455.0" layoutY="29.0" mnemonicParsing="false" onAction="#incAmount" text="+" />

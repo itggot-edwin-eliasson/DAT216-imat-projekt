@@ -59,4 +59,8 @@ public class ProductListItem extends AnchorPane {
             amount -= 1;
             productAmount.setText((int)amount + "");
     }
+
+    @FXML private void showProductInfo(){
+        parentController.showProductInfo(product);
+    }
 }

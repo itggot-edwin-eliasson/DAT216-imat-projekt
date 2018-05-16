@@ -32,3 +32,7 @@
 .category-item:pressed {
     -fx-background-color: #d0d0d0;
 }
+
+.light-out {
+    -fx-background-color: rgba(0,0,0,0.75);
+}
