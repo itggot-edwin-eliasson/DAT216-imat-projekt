@@ -26,10 +26,10 @@ public class Translator {
                 categoryName = "Citrus frukter";
                 break;
             case HOT_DRINKS:
-                categoryName = "Varma drycker";
+                categoryName = "Drycker varma";
                 break;
             case COLD_DRINKS:
-                categoryName = "Kalla drycker";
+                categoryName = "Drycker kalla";
                 break;
             case EXOTIC_FRUIT:
                 categoryName = "Exotiska frukter";
@@ -53,7 +53,7 @@ public class Translator {
                 categoryName = "Meloner";
                 break;
             case FLOUR_SUGAR_SALT:
-                categoryName = "Torrvaror";
+                categoryName = "Mjöl, socker och salt";
                 break;
             case NUTS_AND_SEEDS:
                 categoryName = "Nötter och frön";

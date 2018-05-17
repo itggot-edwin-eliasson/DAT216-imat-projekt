@@ -7,18 +7,18 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="100.0" prefWidth="495.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="169.0" prefWidth="674.0" styleClass="product-item" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView id="ProductListImage" fx:id="productImage" fitHeight="90.0" fitWidth="114.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="ProductListImage" fx:id="productImage" fitHeight="145.0" fitWidth="162.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@resources/images/product_1.jpg" />
          </image></ImageView>
-      <Label id="ProductListHeadline" fx:id="productName" layoutX="132.0" layoutY="20.0" text="Rubrik" />
-      <Label id="ProductListText" fx:id="productInfo" layoutX="135.0" layoutY="42.0" text="Text" />
-      <Button id="ProductListInfoButton" layoutX="132.0" layoutY="63.0" mnemonicParsing="false" onAction="#showProductInfo" text="Mer info" />
-      <TextField id="ProductListTextField" fx:id="productAmount" layoutX="398.0" layoutY="29.0" prefHeight="26.0" prefWidth="34.0" promptText="1" />
-      <Button id="ProductListDecButton" layoutX="353.0" layoutY="29.0" mnemonicParsing="false" onAction="#decAmount" prefHeight="26.0" prefWidth="34.0" text="-" />
-      <Button id="ProductListIncButton" layoutX="455.0" layoutY="29.0" mnemonicParsing="false" onAction="#incAmount" text="+" />
-      <Button id="ProductListAddToCartButton" layoutX="364.0" layoutY="63.0" mnemonicParsing="false" onAction="#addToCart" text="Lägg till i kassan" />
+      <Label id="ProductListHeadline" fx:id="productName" layoutX="182.0" layoutY="50.0" text="Rubrik" />
+      <Label id="ProductListText" fx:id="productInfo" layoutX="185.0" layoutY="72.0" text="Text" />
+      <Button id="ProductListInfoButton" layoutX="182.0" layoutY="93.0" mnemonicParsing="false" onAction="#showProductInfo" text="Mer info" />
+      <TextField id="ProductListTextField" fx:id="productAmount" layoutX="448.0" layoutY="59.0" prefHeight="26.0" prefWidth="34.0" promptText="1" />
+      <Button id="ProductListDecButton" layoutX="403.0" layoutY="59.0" mnemonicParsing="false" onAction="#decAmount" prefHeight="26.0" prefWidth="34.0" text="-" />
+      <Button id="ProductListIncButton" layoutX="505.0" layoutY="59.0" mnemonicParsing="false" onAction="#incAmount" text="+" />
+      <Button id="ProductListAddToCartButton" layoutX="414.0" layoutY="93.0" mnemonicParsing="false" onAction="#addToCart" text="Lägg till i kassan" />
    </children>
 </fx:root>

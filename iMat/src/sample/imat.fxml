@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
@@ -13,171 +15,23 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <SplitPane dividerPositions="0.5" layoutX="258.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.08521303258145363" layoutX="258.0" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
-            <AnchorPane id="HeaderPane" maxHeight="100.0" minHeight="100.0" minWidth="600.0" prefHeight="100.0" prefWidth="160.0">
+            <AnchorPane id="HeaderPane" maxHeight="64.0" minHeight="64.0" prefHeight="47.0" prefWidth="998.0">
                <children>
-                  <Label layoutX="30.0" layoutY="4.0" prefHeight="60.0" prefWidth="176.0" styleClass="logo" text="iMAT" />
-                  <Label id="HeaderNameLabel" fx:id="userName" layoutX="868.0" layoutY="21.0" text="Namn Namn" />
-                  <Button layoutX="867.0" layoutY="50.0" mnemonicParsing="false" onAction="#toLogin" text="Logga in" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="8.0" prefHeight="60.0" prefWidth="176.0" styleClass="logo" text="iMAT" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" />
+                  <TextField id="ListFoodSearchField" layoutX="522.0" layoutY="23.0" promptText="Sök" />
+                  <ImageView id="ListFoodSearchIcon" fitHeight="20.0" fitWidth="20.0" layoutX="705.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/baseline_search_black_18dp.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+            <StackPane prefHeight="776.0" prefWidth="998.0">
                <children>
-                  <AnchorPane fx:id="registerPane" prefHeight="592.0" prefWidth="838.0">
-                     <children>
-                        <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <items>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                 <children>
-                                    <StackPane prefHeight="687.0" prefWidth="492.0">
-                                       <children>
-                                          <AnchorPane maxHeight="688.0" maxWidth="500.0" minHeight="586.0" minWidth="390.0" prefHeight="688.0" prefWidth="492.0">
-                                             <children>
-                                                <Label layoutX="219.0" layoutY="16.0" text="Varukorg" />
-                                                <ScrollPane hbarPolicy="NEVER" prefHeight="462.0" prefWidth="394.0" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
-                                                   <content>
-                                                      <FlowPane fx:id="shoppingCartPreview" prefHeight="553.0" prefWidth="369.0" />
-                                                   </content>
-                                                </ScrollPane>
-                                                <Button layoutX="31.0" layoutY="620.0" mnemonicParsing="false" onAction="#toStore" text="Tillbaka till butik" />
-                                                <Label layoutX="306.0" layoutY="625.0" text="Summa:" />
-                                                <Label fx:id="totalPrice" layoutX="362.0" layoutY="625.0" text="Pengar" />
-                                             </children>
-                                          </AnchorPane>
-                                       </children>
-                                    </StackPane>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                 <children>
-                                    <StackPane layoutX="14.0" layoutY="14.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <AnchorPane fx:id="registerEditInformation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
-                                             <children>
-                                                <Label layoutX="65.0" layoutY="58.0" text="Personuppgifter:" />
-                                                <Label layoutX="68.0" layoutY="129.0" text="Leveransadress" />
-                                                <TextField layoutX="65.0" layoutY="146.0" promptText="Väg osv" />
-                                                <Label layoutX="65.0" layoutY="200.0" text="Betalningsmetod" />
-                                                <TextField layoutX="65.0" layoutY="217.0" />
-                                                <TextField layoutX="65.0" layoutY="254.0" />
-                                                <Button layoutX="16.0" layoutY="537.0" mnemonicParsing="false" text="Tillbaka" />
-                                                <Button layoutX="326.0" layoutY="537.0" mnemonicParsing="false" text="Spara" />
-                                             </children>
-                                          </AnchorPane>
-                                          <AnchorPane fx:id="registerRegisterPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
-                                             <children>
-                                                <Label layoutX="84.0" layoutY="92.0" text="Registrera dig" />
-                                                <TextField layoutX="84.0" layoutY="136.0" promptText="Förnamn" />
-                                                <TextField layoutX="84.0" layoutY="170.0" promptText="Efternamn" />
-                                                <TextField layoutX="84.0" layoutY="207.0" promptText="Adress" />
-                                                <Label layoutX="86.0" layoutY="258.0" text="Betalningsalternativ" />
-                                                <TextField layoutX="87.0" layoutY="281.0" promptText="Kortnummer" />
-                                                <TextField layoutX="86.0" layoutY="314.0" prefHeight="26.0" prefWidth="49.0" promptText="CVV" />
-                                                <Button layoutX="276.0" layoutY="528.0" mnemonicParsing="false" text="Registrera dig" />
-                                             </children>
-                                          </AnchorPane>
-                                          <AnchorPane fx:id="registerStart" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
-                                             <children>
-                                                <Button layoutX="147.0" layoutY="370.0" mnemonicParsing="false" text="Logga In" />
-                                                <Button layoutX="147.0" layoutY="410.0" mnemonicParsing="false" onAction="#toRegisterEnd" text="Registrera dig" />
-                                                <Button layoutX="147.0" layoutY="447.0" mnemonicParsing="false" onAction="#toStore" text="Fortsätt som gäst" />
-                                                <Label layoutX="95.0" layoutY="82.0" prefHeight="127.0" prefWidth="255.0" styleClass="normal-text" text="För att gå vidare vänligen välj något av följande:" textAlignment="CENTER" wrapText="true" />
-                                             </children>
-                                          </AnchorPane>
-                                          <AnchorPane fx:id="registerEnd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
-                                             <children>
-                                                <Label layoutX="69.0" layoutY="61.0" text="Leveransadress" />
-                                                <Label layoutX="69.0" layoutY="257.0" text="Betalningsalternativ" />
-                                                <TextArea editable="false" layoutX="69.0" layoutY="78.0" prefHeight="144.0" prefWidth="200.0" promptText="Namn och dylikt" />
-                                                <TextArea layoutX="69.0" layoutY="274.0" prefHeight="61.0" prefWidth="200.0" />
-                                                <Button layoutX="249.0" layoutY="524.0" mnemonicParsing="false" onAction="#placeOrder" onMouseClicked="#placeOrder" text="Genomför köp" />
-                                                <Button layoutX="227.0" layoutY="352.0" mnemonicParsing="false" onAction="#toRegisterInformation" text="Ändra information" />
-                                             </children>
-                                          </AnchorPane>
-                                       </children>
-                                    </StackPane>
-                                 </children>
-                              </AnchorPane>
-                           </items>
-                        </SplitPane>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="storePane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <AnchorPane fx:id="productInfo" layoutX="150.0" layoutY="95.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
-                           <children>
-                              <ImageView fx:id="productInfoImage" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../../.dat215/imat/images/product_9.jpg" />
-                                 </image>
-                              </ImageView>
-                              <Label fx:id="productInfoName" layoutX="260.0" layoutY="32.0" text="Product name goes here" />
-                              <TextArea fx:id="productMoreInfoArea" layoutX="248.0" layoutY="96.0" prefHeight="303.0" prefWidth="364.0" promptText="Product info goes here" />
-                              <Button layoutX="597.0" layoutY="3.0" mnemonicParsing="false" onAction="#exitProductInfo" text="Stäng fönster" />
-                           </children>
-                        </AnchorPane>
-                        <SplitPane fx:id="storeSplitPane" dividerPositions="0.1971371170266198" layoutY="158.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <items>
-                              <AnchorPane maxWidth="150.0" minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="100.0">
-                                 <children>
-                                    <ScrollPane hbarPolicy="NEVER" layoutY="152.0" prefHeight="505.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="152.0">
-                                       <content>
-                                          <FlowPane fx:id="categoryMenu" prefHeight="534.0" prefWidth="129.0" />
-                                       </content>
-                                    </ScrollPane>
-                                    <FlowPane fx:id="navMenu" layoutX="-3.0" layoutY="-3.0" prefHeight="121.0" prefWidth="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                    <Label layoutX="28.0" layoutY="122.0" prefHeight="31.0" prefWidth="95.0" text="Välj Kategori" textAlignment="CENTER" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #ffffff;">
-                                 <children>
-                                    <StackPane prefHeight="618.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="156.0" AnchorPane.topAnchor="70.0">
-                                       <children>
-                                          <ScrollPane hbarPolicy="NEVER">
-                                             <content>
-                                                <FlowPane id="PrductListFlow" prefHeight="616.0" prefWidth="681.0" />
-                                             </content>
-                                          </ScrollPane>
-                                          <AnchorPane fx:id="orderHistoryPane" prefHeight="688.0" prefWidth="685.0" style="-fx-background-color: #ffffff;">
-                                             <children>
-                                                <Label layoutX="305.0" layoutY="31.0" text="Orderhistorik" />
-                                                <ScrollPane hbarPolicy="NEVER" layoutX="256.0" layoutY="60.0" prefHeight="474.0" prefWidth="685.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                                   <content>
-                                                      <FlowPane fx:id="orderHistoryFlowPane" prefHeight="475.0" prefWidth="682.0" style="-fx-background-color: #ffffff;" />
-                                                   </content>
-                                                </ScrollPane>
-                                             </children>
-                                          </AnchorPane>
-                                          <ScrollPane fx:id="listView" hbarPolicy="NEVER">
-                                             <content>
-                                                <FlowPane fx:id="productListFlowPane" prefHeight="620.0" prefWidth="661.0" />
-                                             </content>
-                                          </ScrollPane>
-                                       </children>
-                                    </StackPane>
-                                    <TextField id="ListFoodSearchField" layoutX="275.0" layoutY="2.0" promptText="Sök" />
-                                    <Button layoutX="306.0" layoutY="37.0" mnemonicParsing="false" onAction="#selectListPane" text="Lista" AnchorPane.topAnchor="37.0" />
-                                    <Button layoutX="354.0" layoutY="37.0" mnemonicParsing="false" text="Bilder" AnchorPane.topAnchor="37.0" />
-                                    <ScrollPane hbarPolicy="NEVER" layoutX="539.0" prefHeight="627.0" prefWidth="155.0" AnchorPane.bottomAnchor="61.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <content>
-                                          <FlowPane fx:id="shoppingCartFlowPane" prefHeight="623.0" prefWidth="155.0" />
-                                       </content>
-                                    </ScrollPane>
-                                    <Button layoutX="724.0" layoutY="642.0" mnemonicParsing="false" onAction="#toRegister" text="Till kassan" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="31.5" />
-                                    <ImageView id="ListFoodSearchIcon" fitHeight="20.0" fitWidth="20.0" layoutX="460.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@resources/images/product_1.jpg" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </AnchorPane>
-                           </items>
-                        </SplitPane>
-                     </children>
-                  </AnchorPane>
                   <AnchorPane id="ShadowPanePopUp" fx:id="loginPane" prefHeight="374.0" prefWidth="667.0">
                      <children>
                         <AnchorPane layoutX="150.0" layoutY="113.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="698.0" style="-fx-background-color: #ffffff;">
@@ -226,6 +80,236 @@
                               </StackPane>
                            </children>
                         </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="592.0" prefWidth="838.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <StackPane prefHeight="687.0" prefWidth="492.0">
+                                       <children>
+                                          <AnchorPane maxHeight="688.0" maxWidth="500.0" minHeight="586.0" minWidth="390.0" prefHeight="688.0" prefWidth="492.0">
+                                             <children>
+                                                <Label layoutX="219.0" layoutY="16.0" text="Varukorg" />
+                                                <ScrollPane hbarPolicy="NEVER" prefHeight="462.0" prefWidth="394.0" AnchorPane.bottomAnchor="88.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                                   <content>
+                                                      <FlowPane fx:id="shoppingCartPreview" prefHeight="553.0" prefWidth="369.0" />
+                                                   </content>
+                                                </ScrollPane>
+                                                <Button layoutX="31.0" layoutY="620.0" mnemonicParsing="false" onAction="#toStore" text="Tillbaka till butik" />
+                                                <Label layoutX="306.0" layoutY="625.0" text="Summa:" />
+                                                <Label fx:id="totalPrice" layoutX="362.0" layoutY="625.0" text="0.0 kr" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <StackPane layoutX="14.0" layoutY="14.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane fx:id="registerEnd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Label layoutX="69.0" layoutY="61.0" text="Leveransadress" />
+                                                <Label layoutX="69.0" layoutY="257.0" text="Betalningsalternativ" />
+                                                <TextArea editable="false" layoutX="69.0" layoutY="78.0" prefHeight="144.0" prefWidth="200.0" promptText="Namn och dylikt" />
+                                                <TextArea layoutX="69.0" layoutY="274.0" prefHeight="61.0" prefWidth="200.0" />
+                                                <Button layoutX="249.0" layoutY="524.0" mnemonicParsing="false" onAction="#placeOrder" onMouseClicked="#placeOrder" text="Genomför köp" />
+                                                <Button layoutX="227.0" layoutY="352.0" mnemonicParsing="false" onAction="#toRegisterInformation" text="Ändra information" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="registerStart" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Button layoutX="147.0" layoutY="370.0" mnemonicParsing="false" onAction="#toRegisterLogin" text="Logga In" />
+                                                <Button layoutX="147.0" layoutY="410.0" mnemonicParsing="false" onAction="#toRegisterRegister" text="Registrera dig" />
+                                                <Button layoutX="147.0" layoutY="447.0" mnemonicParsing="false" onAction="#toRegisterInformation" text="Fortsätt som gäst" />
+                                                <Label layoutX="95.0" layoutY="82.0" prefHeight="127.0" prefWidth="255.0" styleClass="normal-text" text="För att gå vidare vänligen välj något av följande:" textAlignment="CENTER" wrapText="true" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="registerLogin" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Label layoutX="219.0" layoutY="50.0" text="Logga in" />
+                                                <Label layoutX="199.0" layoutY="124.0" text="Användarnamn" />
+                                                <TextField fx:id="usernameLoginRegister" layoutX="162.0" layoutY="156.0" />
+                                                <PasswordField fx:id="passwordLoginRegister" layoutX="161.0" layoutY="274.0" />
+                                                <Label layoutX="218.0" layoutY="237.0" text="Lösenord" />
+                                                <Button layoutX="350.0" layoutY="505.0" mnemonicParsing="false" onAction="#loginFromRegister" text="Logga in" />
+                                                <Button layoutX="66.0" layoutY="505.0" mnemonicParsing="false" onAction="#backFromRegisterLogin" text="Tillbaka" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="registerRegisterPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Label layoutX="84.0" layoutY="92.0" text="Registrera dig" />
+                                                <TextField fx:id="usernameRegisterRegister" layoutX="84.0" layoutY="136.0" promptText="Användarnamn" />
+                                                <TextField layoutX="80.0" layoutY="252.0" promptText="Adress" />
+                                                <Label layoutX="89.0" layoutY="321.0" text="Betalningsalternativ" />
+                                                <TextField layoutX="90.0" layoutY="344.0" promptText="Kortnummer" />
+                                                <TextField layoutX="89.0" layoutY="377.0" prefHeight="26.0" prefWidth="49.0" promptText="CVV" />
+                                                <Button layoutX="276.0" layoutY="528.0" mnemonicParsing="false" onAction="#registerFromRegister" text="Registrera dig" />
+                                                <PasswordField fx:id="passwordRegisterRegister" layoutX="84.0" layoutY="177.0" promptText="Lösenord" />
+                                                <Button layoutX="61.0" layoutY="528.0" mnemonicParsing="false" onAction="#backFromRegisterRegister" text="Tillbaka" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="registerEditInformation" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Label layoutX="65.0" layoutY="58.0" text="Personuppgifter:" />
+                                                <Label layoutX="68.0" layoutY="129.0" text="Leveransadress" />
+                                                <TextField layoutX="65.0" layoutY="146.0" promptText="Väg osv" />
+                                                <Label layoutX="65.0" layoutY="200.0" text="Betalningsmetod" />
+                                                <TextField layoutX="65.0" layoutY="217.0" />
+                                                <TextField layoutX="65.0" layoutY="254.0" />
+                                                <Button layoutX="16.0" layoutY="537.0" mnemonicParsing="false" onAction="#backFromRegisterInformation" text="Tillbaka" />
+                                                <Button layoutX="326.0" layoutY="537.0" mnemonicParsing="false" text="Spara" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="storePane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <AnchorPane fx:id="productInfo" layoutX="150.0" layoutY="95.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                           <children>
+                              <ImageView fx:id="productInfoImage" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../.dat215/imat/images/product_9.jpg" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="productInfoName" layoutX="260.0" layoutY="32.0" text="Product name goes here" />
+                              <TextArea fx:id="productMoreInfoArea" layoutX="248.0" layoutY="96.0" prefHeight="303.0" prefWidth="364.0" promptText="Product info goes here" />
+                              <Button layoutX="597.0" layoutY="3.0" mnemonicParsing="false" onAction="#exitProductInfo" text="Stäng fönster" />
+                           </children>
+                        </AnchorPane>
+                        <SplitPane fx:id="storeSplitPane" dividerPositions="0.21084337349397592" layoutY="158.0" prefHeight="160.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <items>
+                              <AnchorPane maxWidth="224.0" minHeight="0.0" minWidth="224.0" prefHeight="688.0" prefWidth="224.0">
+                                 <children>
+                                    <ScrollPane hbarPolicy="NEVER" layoutY="176.0" prefHeight="512.0" prefWidth="192.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="176.0">
+                                       <content>
+                                          <FlowPane fx:id="categoryMenu" prefHeight="534.0" prefWidth="142.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <FlowPane fx:id="navMenu" layoutX="-3.0" layoutY="-3.0" prefHeight="121.0" prefWidth="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <Label layoutX="22.0" layoutY="142.0" prefHeight="31.0" prefWidth="95.0" text="Välj Kategori" textAlignment="CENTER" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #ffffff;">
+                                 <children>
+                                    <StackPane layoutY="-2.0" prefHeight="726.0" prefWidth="694.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="-2.0">
+                                       <children>
+                                          <ScrollPane hbarPolicy="NEVER">
+                                             <content>
+                                                <FlowPane id="PrductListFlow" prefHeight="616.0" prefWidth="681.0" />
+                                             </content>
+                                          </ScrollPane>
+                                          <AnchorPane fx:id="orderHistoryPane" prefHeight="618.0" prefWidth="575.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Label layoutX="305.0" layoutY="31.0" text="Orderhistorik" />
+                                                <ScrollPane hbarPolicy="NEVER" layoutX="256.0" layoutY="60.0" prefHeight="474.0" prefWidth="685.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                                   <content>
+                                                      <FlowPane fx:id="orderHistoryFlowPane" prefHeight="475.0" prefWidth="682.0" style="-fx-background-color: #ffffff;" />
+                                                   </content>
+                                                </ScrollPane>
+                                             </children>
+                                          </AnchorPane>
+                                          <ScrollPane fx:id="listView" hbarPolicy="NEVER" prefHeight="618.0" prefWidth="562.0">
+                                             <content>
+                                                <FlowPane fx:id="productListFlowPane" prefHeight="620.0" prefWidth="591.0" />
+                                             </content>
+                                          </ScrollPane>
+                                          <AnchorPane fx:id="orderConfirmed" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Label alignment="CENTER" layoutX="231.0" layoutY="50.0" prefHeight="107.0" prefWidth="245.0" text="Tack för din beställning" textAlignment="CENTER" wrapText="true" />
+                                                <Button layoutX="270.0" layoutY="587.0" mnemonicParsing="false" onAction="#toStore" prefHeight="55.0" prefWidth="167.0" text="Tillbaka till butik" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="confirmPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Label layoutX="325.0" layoutY="57.0" text="Bekräftelse av order" />
+                                                <Label layoutX="340.0" layoutY="115.0" text="Kunduppgifter" />
+                                                <Label alignment="CENTER" layoutX="253.0" layoutY="150.0" text="Label" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" layoutX="253.0" layoutY="185.0" text="Label" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" layoutX="253.0" layoutY="220.0" text="Label" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" layoutX="253.0" layoutY="290.0" text="Label" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" layoutX="253.0" layoutY="255.0" text="Label" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" layoutX="483.0" layoutY="150.0" text="Label" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" layoutX="483.0" layoutY="185.0" text="Label" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" layoutX="483.0" layoutY="220.0" text="Label" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" layoutX="483.0" layoutY="255.0" text="Label" textAlignment="CENTER" />
+                                                <Label layoutX="315.0" layoutY="348.0" text="Betalning och leverans" />
+                                                <Label layoutX="253.0" layoutY="390.0" text="Label" />
+                                                <Label layoutX="253.0" layoutY="425.0" text="Label" />
+                                                <Label layoutX="483.0" layoutY="390.0" text="Label" />
+                                                <Label layoutX="483.0" layoutY="425.0" text="Label" />
+                                                <Button layoutX="593.0" layoutY="604.0" mnemonicParsing="false" onAction="#toOrderConfirmed" text="Bekräfta order" AnchorPane.rightAnchor="46.5" />
+                                                <Button layoutX="53.0" layoutY="604.0" mnemonicParsing="false" onAction="#backFromConfirm" text="Tillbaka" />
+                                                <Label layoutX="484.0" layoutY="554.0" text="Summa:" AnchorPane.rightAnchor="160.0" />
+                                                <Label fx:id="confirmPanePrice" layoutX="603.0" layoutY="554.0" text="0.0 kr" AnchorPane.rightAnchor="107.0" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="paymentPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Label layoutX="317.0" layoutY="39.0" text="Betalning och leverans" />
+                                                <Label layoutX="160.0" layoutY="132.0" text="Kortnummer" />
+                                                <Label layoutX="160.0" layoutY="182.0" text="CVV" />
+                                                <Label layoutX="160.0" layoutY="332.0" text="Datum" />
+                                                <Label layoutX="160.0" layoutY="382.0" text="Tidsintervall" />
+                                                <TextField fx:id="cardNumberField" layoutX="304.0" layoutY="127.0" />
+                                                <TextField fx:id="cvvField" layoutX="304.0" layoutY="177.0" prefHeight="27.0" prefWidth="55.0" />
+                                                <DatePicker fx:id="date" layoutX="304.0" layoutY="327.0" />
+                                                <ComboBox fx:id="time" layoutX="304.0" layoutY="377.0" prefWidth="150.0" />
+                                                <Button layoutX="590.0" layoutY="577.0" mnemonicParsing="false" onAction="#toConfirm" text="Fortsätt" AnchorPane.rightAnchor="89.5" />
+                                                <Button layoutX="50.0" layoutY="580.0" mnemonicParsing="false" onAction="#backFromPayment" text="Tillbaka" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="registerPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Label layoutX="349.0" layoutY="56.0" text="Kunduppgifter" />
+                                                <Label layoutX="168.0" layoutY="99.0" text="Förnamn" />
+                                                <Label layoutX="168.0" layoutY="149.0" text="Efternamn" />
+                                                <Label layoutX="168.0" layoutY="199.0" text="Gata" />
+                                                <Label layoutX="168.0" layoutY="249.0" text="Gatunummer" />
+                                                <Label layoutX="167.0" layoutY="299.0" text="Postnummer" />
+                                                <Label layoutX="168.0" layoutY="349.0" text="Stad" />
+                                                <Label layoutX="168.0" layoutY="399.0" text="Land" />
+                                                <Label layoutX="169.0" layoutY="449.0" text="Telefon" />
+                                                <Label layoutX="169.0" layoutY="499.0" text="Mobilnummer" />
+                                                <Label layoutX="169.0" layoutY="549.0" text="E-postadress" />
+                                                <TextField fx:id="firstNameField" layoutX="312.0" layoutY="94.0" />
+                                                <TextField fx:id="surnameField" layoutX="312.0" layoutY="144.0" />
+                                                <TextField fx:id="streetField" layoutX="312.0" layoutY="194.0" />
+                                                <TextField fx:id="streetNumberField" layoutX="312.0" layoutY="244.0" />
+                                                <TextField fx:id="postNumberField" layoutX="312.0" layoutY="294.0" />
+                                                <TextField fx:id="cityField" layoutX="312.0" layoutY="344.0" />
+                                                <TextField fx:id="countryField" layoutX="312.0" layoutY="394.0" />
+                                                <TextField fx:id="phoneField" layoutX="312.0" layoutY="444.0" />
+                                                <TextField fx:id="mobilePhoneField" layoutX="312.0" layoutY="494.0" />
+                                                <TextField fx:id="e_mailField" layoutX="312.0" layoutY="544.0" />
+                                                <Button layoutX="598.0" layoutY="619.0" mnemonicParsing="false" onAction="#toPayment" text="Fortsätt" AnchorPane.rightAnchor="81.5" />
+                                                <Button layoutX="58.0" layoutY="619.0" mnemonicParsing="false" onAction="#backFromRegister" text="Tillbaka" />
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </StackPane>
+                                    <ScrollPane hbarPolicy="NEVER" layoutX="539.0" prefHeight="635.0" prefWidth="266.0" AnchorPane.bottomAnchor="89.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <content>
+                                          <FlowPane fx:id="shoppingCartFlowPane" prefHeight="623.0" prefWidth="188.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <Button layoutX="566.0" layoutY="664.0" mnemonicParsing="false" onAction="#toRegister" prefHeight="61.0" prefWidth="268.0" text="Till kassan" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Label layoutX="792.0" layoutY="641.0" text="Summa: " AnchorPane.bottomAnchor="66.0" AnchorPane.rightAnchor="118.5" />
+                                    <Label fx:id="shoppingCartPrice" layoutX="863.0" layoutY="642.0" text="0.0 kr" AnchorPane.bottomAnchor="66.0" AnchorPane.rightAnchor="65.0" />
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
                      </children>
                   </AnchorPane>
                </children>

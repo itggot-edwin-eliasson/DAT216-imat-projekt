@@ -8,13 +8,11 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import org.w3c.dom.Text;
 import se.chalmers.cse.dat216.project.*;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.Flow;
 
 public class Controller implements Initializable {
@@ -26,6 +24,18 @@ public class Controller implements Initializable {
     User user;
     String username;
     String password;
+    String firstName;
+    String surname;
+    String street;
+    String streetNumber;
+    String postNumber;
+    String city;
+    String country;
+    String phone;
+    String mobilePhone;
+    String email;
+    String cardNumber;
+    String cvv;
 
     @FXML private FlowPane categoryMenu;
     @FXML private FlowPane productListFlowPane;
@@ -48,6 +58,27 @@ public class Controller implements Initializable {
     @FXML private AnchorPane productInfo;
     @FXML private Label productInfoName;
     @FXML private ImageView productInfoImage;
+    @FXML private AnchorPane registerLogin;
+    @FXML private AnchorPane paymentPane;
+    @FXML private AnchorPane confirmPane;
+    @FXML private AnchorPane orderConfirmed;
+    @FXML private Label shoppingCartPrice;
+    @FXML private Label confirmPanePrice;
+
+    @FXML private TextField firstNameField;
+    @FXML private TextField surnameField;
+    @FXML private TextField streetField;
+    @FXML private TextField streetNumberField;
+    @FXML private TextField postNumberField;
+    @FXML private TextField cityField;
+    @FXML private TextField countryField;
+    @FXML private TextField phoneField;
+    @FXML private TextField mobilePhoneField;
+    @FXML private TextField e_mailField;
+    @FXML private TextField cardNumberField;
+    @FXML private TextField cvvField;
+    @FXML private DatePicker date;
+    @FXML private ComboBox time;
 
     @FXML private Label usernameLoginError;
     @FXML private Label passwordLoginError;
@@ -57,6 +88,11 @@ public class Controller implements Initializable {
     @FXML private AnchorPane registerDialog;
     @FXML private TextField usernameRegisterDialogField;
     @FXML private PasswordField passwordRegisterDialogField;
+    @FXML private TextField usernameLoginRegister;
+    @FXML private PasswordField passwordLoginRegister;
+    @FXML private TextField usernameRegisterRegister;
+    @FXML private PasswordField passwordRegisterRegister;
+    @FXML private Button loginButton;
 
 
 
@@ -77,13 +113,13 @@ public class Controller implements Initializable {
         passwordLogin();
         usernameRegister();
         passwordRegister();
-        if(user == null){
-            userName.setText("");
-        } else {
-            userName.setText(user.getUserName());
-        }
+        usernameRegisterRegister();
+        passwordRegisterRegister();
+        usernameLoginRegister();
+        passwordLoginRegister();
         registerStart.toFront();
         storePane.toFront();
+        listView.toFront();
     }
 
     private void updateProductList(){
@@ -117,7 +153,7 @@ public class Controller implements Initializable {
         navMenu.getChildren().clear();
         NavMenuListItem item = new NavMenuListItem("Startsida", this);
         navMenu.getChildren().add(item);
-        item = new NavMenuListItem("Min sida", this);
+        item = new NavMenuListItem("Favoriter", this);
         navMenu.getChildren().add(item);
         item = new NavMenuListItem("Orderhistorik", this);
         navMenu.getChildren().add(item);
@@ -139,7 +175,8 @@ public class Controller implements Initializable {
             ShoppingCartListItem item = new ShoppingCartListItem(shoppingList.get(i), this);
             shoppingCartFlowPane.getChildren().add(item);
         }
-
+        shoppingCartPrice.setText(sc.getTotal() + " kr");
+        confirmPanePrice.setText(sc.getTotal() + " kr");
     }
 
     private void updateShoppingView(){
@@ -150,7 +187,99 @@ public class Controller implements Initializable {
             shoppingCartPreview.getChildren().add(item);
         }
         totalPrice.setText(sc.getTotal() + " kr");
+        confirmPanePrice.setText(sc.getTotal() + " kr");
 
+    }
+
+    private void textFieldSetup(){
+        firstNameField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    //focusgained - do nothing
+                } else{
+                    firstName = firstNameField.getText();
+
+                }
+            }
+        });
+        surnameField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    //focusgained - do nothing
+                } else{
+                    surname = surnameField.getText();
+
+                }
+            }
+        });
+        streetField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    //focusgained - do nothing
+                } else{
+                    street = streetField.getText();
+
+                }
+            }
+        });
+        streetNumberField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    //focusgained - do nothing
+                } else{
+                    streetNumber = streetNumberField.getText();
+
+                }
+            }
+        });
+        postNumberField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    //focusgained - do nothing
+                } else{
+                    postNumber = postNumberField.getText();
+
+                }
+            }
+        });
+        cityField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    //focusgained - do nothing
+                } else{
+                    city = cityField.getText();
+
+                }
+            }
+        });
+        countryField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    //focusgained - do nothing
+                } else{
+                    country = countryField.getText();
+
+                }
+            }
+        });
+        firstNameField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    //focusgained - do nothing
+                } else{
+                    firstName = firstNameField.getText();
+
+                }
+            }
+        });
     }
 
     private void usernameLogin(){
@@ -225,6 +354,78 @@ public class Controller implements Initializable {
         });
     }
 
+    private void usernameLoginRegister(){
+        usernameLoginRegister.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+                if(newValue){
+                    //focusgained - do nothing
+                }
+                else{
+                    username = usernameLoginRegister.getText();
+
+                }
+
+            }
+        });
+    }
+
+    private void passwordLoginRegister(){
+        passwordLoginRegister.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+                if(newValue){
+                    //focusgained - do nothing
+                }
+                else{
+                    password = passwordLoginRegister.getText();
+
+                }
+
+            }
+        });
+    }
+
+    private void usernameRegisterRegister(){
+        usernameRegisterRegister.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+                if(newValue){
+                    //focusgained - do nothing
+                }
+                else{
+                    username = usernameRegisterRegister.getText();
+
+                }
+
+            }
+        });
+    }
+
+    private void passwordRegisterRegister(){
+        passwordRegisterRegister.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+                if(newValue){
+                    //focusgained - do nothing
+                }
+                else{
+                    password = passwordRegisterRegister.getText();
+
+                }
+
+            }
+        });
+    }
+
     public void addToShoppingCart(Product product, double amount){
         boolean contains = false;
         for(int i = 0; i < sc.getItems().size(); i++){
@@ -259,7 +460,7 @@ public class Controller implements Initializable {
                 storePane.toFront();
                 listView.toFront();
                 break;
-            case "Min sida":
+            case "Favoriter":
                 break;
 
             case "Orderhistorik":
@@ -276,6 +477,10 @@ public class Controller implements Initializable {
         productInfoImage.setImage(dh.getFXImage(product));
     }
 
+    private void registerEnd(){
+        registerEnd.toFront();
+    }
+
     @FXML
     private void selectListPane(){
         listView.toFront();
@@ -283,12 +488,15 @@ public class Controller implements Initializable {
 
     @FXML
     private void toRegister(){
-        registerPane.toFront();
+        if(sc.getItems().size() != 0)
+            registerPane.toFront();
+            registerStart.toFront();
     }
 
     @FXML
     private void toStore(){
         storePane.toFront();
+        listView.toFront();
     }
 
     @FXML
@@ -299,6 +507,11 @@ public class Controller implements Initializable {
     @FXML
     private void toRegisterRegister(){
         registerRegisterPane.toFront();
+    }
+
+    @FXML
+    private void toRegisterLogin(){
+        registerLogin.toFront();
     }
 
     @FXML
@@ -328,6 +541,9 @@ public class Controller implements Initializable {
                 user = tmpUser;
                 user.setPassword(password);
                 user.setUserName(username);
+                userName.setText(user.getUserName());
+                loginButton.setText("Logga ut");
+                loginPane.toBack();
             }else{
                 passwordLoginDialogField.focusedProperty();
                 passwordLoginError.setText("Wrong password");
@@ -339,24 +555,78 @@ public class Controller implements Initializable {
     }
 
     @FXML
+    private void loginFromRegister(){
+        User tmpUser = dh.getUser();
+        if(username.equals(tmpUser.getUserName())){
+            if(password.equals(tmpUser.getPassword())){
+                user = tmpUser;
+                user.setPassword(password);
+                user.setUserName(username);
+                userName.setText(user.getUserName());
+                loginButton.setText("Logga ut");
+                registerEnd.toFront();
+            }else{
+                passwordLoginRegister.focusedProperty();
+                //passwordLoginError.setText("Wrong password");
+            }
+        }else{
+            usernameLoginRegister.focusedProperty();
+            //usernameLoginError.setText("Wrong username");
+        }
+    }
+
+    @FXML
     private void register(){
         if (!username.equals("") && !password.equals("")) {
             user = dh.getUser();
             user.setUserName(username);
             user.setPassword(password);
+            loginButton.setText("Logga ut");
             loginPane.toBack();
             userName.setText(user.getUserName());
         }
     }
 
     @FXML
+    private void registerFromRegister(){
+        if (!username.equals("") && !password.equals("")) {
+            user = dh.getUser();
+            user.setUserName(username);
+            user.setPassword(password);
+            registerEnd.toFront();
+            userName.setText(user.getUserName());
+        }
+    }
+
+    @FXML
     private void toLogin(){
-        if(user == null) {
+        System.out.println(loginButton.getText());
+        if(loginButton.getText().equals("Logga in")) {
             usernameLoginError.setText("");
             passwordLoginError.setText("");
             loginPane.toFront();
             loginDialog.toFront();
+            registerEnd();
+        }else{
+            userName.setText("");
+            user = null;
+            loginButton.setText("Logga in");
         }
+    }
+
+    @FXML
+    private void backFromRegisterLogin(){
+        registerLogin.toBack();
+    }
+
+    @FXML
+    private void backFromRegisterRegister(){
+        registerRegisterPane.toBack();
+    }
+
+    @FXML
+    private void backFromRegisterInformation(){
+        registerEditInformation.toBack();
     }
 
     @FXML
@@ -372,5 +642,35 @@ public class Controller implements Initializable {
     @FXML
     private void closeLogin(){
         loginPane.toBack();
+    }
+
+    @FXML
+    private void backFromRegister(){
+        registerPane.toBack();
+    }
+
+    @FXML
+    private void toPayment(){
+        paymentPane.toFront();
+    }
+
+    @FXML
+    private void backFromPayment(){
+        paymentPane.toBack();;
+    }
+
+    @FXML
+    private void toConfirm(){
+        confirmPane.toFront();
+    }
+
+    @FXML
+    private void backFromConfirm(){
+        confirmPane.toBack();
+    }
+
+    @FXML
+    private void toOrderConfirmed(){
+        orderConfirmed.toFront();
     }
 }
