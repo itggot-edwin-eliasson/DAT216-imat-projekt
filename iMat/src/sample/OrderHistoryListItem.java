@@ -43,4 +43,9 @@ public class OrderHistoryListItem extends AnchorPane {
         }
         orderPrice.setText(price + "");
     }
+
+    @FXML
+    private void goToOrder(){
+        parentController.goToOrder(order);
+    }
 }

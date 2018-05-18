@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="65.0" prefWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root onMouseClicked="#goToOrder" prefHeight="65.0" prefWidth="676.0" styleClass="category-item" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="orderDate" layoutX="14.0" layoutY="24.0" text="Date goes here" />
       <Label layoutX="452.0" layoutY="24.0" text="Pris:" />
       <Label fx:id="orderPrice" layoutX="490.0" layoutY="24.0" text="Price goes here" />
       <Label fx:id="orderNumber" layoutX="277.0" layoutY="24.0" text="Ordernummer" />
       <Label layoutX="250.0" layoutY="24.0" text="Nr:" />
+      <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="617.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/baseline_keyboard_arrow_right_black_36dp.png" />
+         </image>
+      </ImageView>
    </children>
 </fx:root>
