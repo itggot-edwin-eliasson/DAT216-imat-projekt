@@ -9,10 +9,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import org.w3c.dom.Text;
 import se.chalmers.cse.dat216.project.*;
 
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.Flow;
 
@@ -25,10 +26,14 @@ public class Controller implements Initializable {
     User user;
     Customer customer = dh.getCustomer();
     CreditCard creditCard = dh.getCreditCard();
+    DecimalFormat df = new DecimalFormat("#.00");
     private String username;
     private String password;
     private String search;
     private Order tmpOrder;
+    private LocalDate deliveryDate;
+    private String deliveryTime = "";
+    private ShoppingItem tmpItem;
 
     @FXML private FlowPane categoryMenu;
     @FXML private FlowPane productListFlowPane;
@@ -46,21 +51,22 @@ public class Controller implements Initializable {
     @FXML private FlowPane orderHistoryFlowPane;
     @FXML private AnchorPane orderHistoryPane;
     @FXML private SplitPane storeSplitPane;
-    @FXML private AnchorPane productInfo;
-    @FXML private Label productInfoName;
-    @FXML private ImageView productInfoImage;
     @FXML private AnchorPane registerLogin;
     @FXML private AnchorPane paymentPane;
     @FXML private AnchorPane confirmPane;
     @FXML private AnchorPane orderConfirmed;
     @FXML private Label shoppingCartPrice;
-    @FXML private Label confirmPanePrice;
     @FXML private AnchorPane favoritesPane;
     @FXML private FlowPane favoritesFlowPane;
     @FXML private Label orderLabel;
     @FXML private AnchorPane orderPane;
     @FXML private FlowPane orderFlowPane;
     @FXML private TextField searchBarField;
+    @FXML private AnchorPane helpPane;
+    @FXML private AnchorPane deleteProductPane;
+    @FXML private AnchorPane emptyShoppingCartPane;
+    @FXML private Button toRegisterButton;
+    @FXML private Button emptyCartButton;
 
     @FXML private TextField firstNameField;
     @FXML private TextField surnameField;
@@ -70,10 +76,17 @@ public class Controller implements Initializable {
     @FXML private TextField phoneField;
     @FXML private TextField mobilePhoneField;
     @FXML private TextField e_mailField;
+    @FXML private TextField cardHolderField;
+    @FXML private ComboBox cardType;
+    @FXML private ComboBox cardMonth;
+    @FXML private ComboBox cardYear;
     @FXML private TextField cardNumberField;
     @FXML private TextField cvvField;
     @FXML private DatePicker date;
-    @FXML private ComboBox time;
+    @FXML private CheckBox timeAllDay;
+    @FXML private CheckBox timeEight;
+    @FXML private CheckBox timeOne;
+    @FXML private CheckBox timeFour;
 
     @FXML private Label firstNameLabel;
     @FXML private Label surnameLabel;
@@ -87,13 +100,14 @@ public class Controller implements Initializable {
     @FXML private Label cvvLabel;
     @FXML private Label dateLabel;
     @FXML private Label timeLabel;
+    @FXML private Label cardTypeLabel;
+    @FXML private Label cardValidDateLabel;
+    @FXML private Label cardHolderLabel;
 
     @FXML private TextField usernameLoginRegister;
     @FXML private PasswordField passwordLoginRegister;
     @FXML private TextField usernameRegisterRegister;
     @FXML private PasswordField passwordRegisterRegister;
-    @FXML private Button loginButton;
-
 
 
     private Map<String, ProductListItem> productListItemMap = new HashMap<String, ProductListItem>();
@@ -111,9 +125,15 @@ public class Controller implements Initializable {
         setCategory();
         setNavMenu();
         textFieldSetup();
+        setCardTypeComboBox();
+        setCardMonthComboBox();
+        setCardYearComboBox();
+        setDatePicker();
+        setCheckBox();
         registerStart.toFront();
         storePane.toFront();
         listView.toFront();
+
     }
 
     private void updateProductList(){
@@ -151,6 +171,8 @@ public class Controller implements Initializable {
         navMenu.getChildren().add(item);
         item = new NavMenuListItem("Orderhistorik", this);
         navMenu.getChildren().add(item);
+        item = new NavMenuListItem("Hjälp", this);
+        navMenu.getChildren().add(item);
     }
 
     private void setOrderHistory(){
@@ -180,20 +202,8 @@ public class Controller implements Initializable {
             ShoppingCartListItem item = new ShoppingCartListItem(shoppingList.get(i), this);
             shoppingCartFlowPane.getChildren().add(item);
         }
-        shoppingCartPrice.setText(sc.getTotal() + " kr");
-        confirmPanePrice.setText(sc.getTotal() + " kr");
-    }
-
-    private void updateShoppingView(){
-        List<ShoppingItem> shoppingList = sc.getItems();
-        shoppingCartPreview.getChildren().clear();
-        for(int i = 0; i < shoppingList.size(); i++){
-            ShoppingCartListItem item = new ShoppingCartListItem(shoppingList.get(i), this);
-            shoppingCartPreview.getChildren().add(item);
-        }
-        totalPrice.setText(sc.getTotal() + " kr");
-        confirmPanePrice.setText(sc.getTotal() + " kr");
-
+        String s = String.format("%n%.2f", sc.getTotal()) + " kr";
+        shoppingCartPrice.setText(s.substring(1));
     }
 
     private void updateFavoritesList(){
@@ -290,6 +300,16 @@ public class Controller implements Initializable {
                 }
             }
         });
+        cardHolderField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    //focusgained - do nothing
+                } else {
+                    creditCard.setHoldersName(cardHolderField.getText());
+                }
+            }
+        });
         cardNumberField.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -297,6 +317,15 @@ public class Controller implements Initializable {
                     //focusgained - do nothing
                 } else {
                     creditCard.setCardNumber(cardNumberField.getText());
+                }
+            }
+        });
+        cardNumberField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    cardNumberField.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
@@ -311,6 +340,15 @@ public class Controller implements Initializable {
                 }
             }
         });
+        cvvField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    cvvField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
         searchBarField.textProperty().addListener((observable, oldValue, newValue) -> {
             search = searchBarField.getText();
             search();
@@ -318,77 +356,83 @@ public class Controller implements Initializable {
         });
     }
 
-    private void usernameLoginRegister(){
-        usernameLoginRegister.focusedProperty().addListener(new ChangeListener<Boolean>() {
-
+    private void setCardTypeComboBox(){
+        cardType.getItems().setAll("Matercard", "Visa", "American Express");
+        cardType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-                if(newValue){
-                    //focusgained - do nothing
-                }
-                else{
-                    username = usernameLoginRegister.getText();
-
-                }
-
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                creditCard.setCardType(newValue);
             }
         });
     }
 
-    private void passwordLoginRegister(){
-        passwordLoginRegister.focusedProperty().addListener(new ChangeListener<Boolean>() {
-
+    private void setCardMonthComboBox(){
+        cardMonth.getItems().setAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+        cardMonth.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-                if(newValue){
-                    //focusgained - do nothing
-                }
-                else{
-                    password = passwordLoginRegister.getText();
-
-                }
-
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                creditCard.setValidMonth(Integer.valueOf(newValue.toString()));
             }
         });
     }
 
-    private void usernameRegisterRegister(){
-        usernameRegisterRegister.focusedProperty().addListener(new ChangeListener<Boolean>() {
-
+    private void setCardYearComboBox(){
+        cardYear.getItems().setAll("2018", "2019", "2020", "2021", "2022", "2023", "2024");
+        cardYear.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-                if(newValue){
-                    //focusgained - do nothing
-                }
-                else{
-                    username = usernameRegisterRegister.getText();
-
-                }
-
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                creditCard.setValidYear(Integer.valueOf(newValue.toString()));
             }
         });
     }
 
-    private void passwordRegisterRegister(){
-        passwordRegisterRegister.focusedProperty().addListener(new ChangeListener<Boolean>() {
+    private void setDatePicker(){
+        date.valueProperty().addListener((ov, oldValue, newValue) -> {
+            deliveryDate = (newValue);
+        });
+    }
 
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-                if(newValue){
-                    //focusgained - do nothing
+    private void setCheckBox(){
+        timeAllDay.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
+                deliveryTime = timeAllDay.getText();
+            }
+        });
+        timeEight.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
+                if (!deliveryTime.equals("") && !deliveryTime.equals(timeAllDay.getText())){
+                    deliveryTime += "\neller " + timeEight.getText();
+                } else if(deliveryTime.equals(timeAllDay.getText())){
+                    //do nothing
+                } else {
+                    deliveryTime = timeEight.getText();
                 }
-                else{
-                    password = passwordRegisterRegister.getText();
-
+            }
+        });
+        timeOne.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
+                if (!deliveryTime.equals("") && !deliveryTime.equals(timeAllDay.getText())) {
+                    deliveryTime += "\neller " + timeOne.getText();
+                } else if (deliveryTime.equals(timeAllDay.getText())) {
+                    //do nothing
+                } else {
+                    deliveryTime = timeOne.getText();
                 }
-
+            }
+        });
+        timeFour.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
+                if (!deliveryTime.equals("") && !deliveryTime.equals(timeAllDay.getText())){
+                    deliveryTime += "\neller " + timeFour.getText();
+                } else if(deliveryTime.equals(timeAllDay.getText())){
+                    //do nothing
+                } else {
+                    deliveryTime = timeFour.getText();
+                }
             }
         });
     }
+
 
     public void addToShoppingCart(Product product, double amount){
         boolean contains = false;
@@ -401,15 +445,30 @@ public class Controller implements Initializable {
         if(!contains) {
             ShoppingItem shoppingItem = new ShoppingItem(product, amount);
             sc.addItem(shoppingItem);
-            updateShoppingList();
-            updateShoppingView();
         }
+        updateShoppingList();
     }
 
-    public void removeFromShoppingCart(ShoppingItem item){
-        sc.removeItem(item);
+
+    public void removeCheck(ShoppingItem item){
+        deleteProductPane.toFront();
+        tmpItem = item;
+    }
+
+    @FXML
+    private void removeFromShoppingCart(){
+        deleteProductPane.toBack();
+        sc.removeItem(tmpItem);
         updateShoppingList();
-        updateShoppingView();
+    }
+    @FXML
+    private void cancelProductRemoval(){
+        deleteProductPane.toBack();
+    }
+
+    @FXML
+    private void cancelSCRemoval(){
+        emptyShoppingCartPane.toBack();
     }
 
     public void getCategory(ProductCategory category){
@@ -434,6 +493,9 @@ public class Controller implements Initializable {
                 storePane.toFront();
                 orderHistoryPane.toFront();
                 break;
+            case "Hjälp":
+                helpPane.toFront();
+                break;
         }
     }
 
@@ -443,12 +505,6 @@ public class Controller implements Initializable {
 
     public void removeFavorite(Product product){
         dh.removeFavorite(product);
-    }
-
-    public void showProductInfo(Product product){
-        productInfo.toFront();
-        productInfoName.setText(product.getName());
-        productInfoImage.setImage(dh.getFXImage(product));
     }
 
     public void goToOrder(Order order){
@@ -469,7 +525,6 @@ public class Controller implements Initializable {
 
     @FXML
     private void toRegister(){
-        System.out.println(dh.isCustomerComplete());
         if(sc.getItems().size() != 0 && dh.isCustomerComplete()) {
             firstNameField.setText(customer.getFirstName());
             surnameField.setText(customer.getLastName());
@@ -522,7 +577,6 @@ public class Controller implements Initializable {
     private void placeOrder() {
         if (sc.getItems().size() > 0){
             dh.placeOrder();
-            updateShoppingView();
             updateShoppingList();
             dh.shutDown();
         }
@@ -536,7 +590,6 @@ public class Controller implements Initializable {
                 user = tmpUser;
                 user.setPassword(password);
                 user.setUserName(username);
-                loginButton.setText("Logga ut");
                 registerEnd.toFront();
             }else{
                 passwordLoginRegister.focusedProperty();
@@ -574,11 +627,6 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void exitProductInfo(){
-        productInfo.toBack();
-    }
-
-    @FXML
     private void backFromRegister(){
         registerPane.toBack();
     }
@@ -597,7 +645,6 @@ public class Controller implements Initializable {
 
     @FXML
     private void toConfirm(){
-        confirmPane.toFront();
         firstNameLabel.setText(customer.getFirstName());
         surnameLabel.setText(customer.getLastName());
         streetLabel.setText(customer.getAddress());
@@ -607,7 +654,15 @@ public class Controller implements Initializable {
         mobilePhoneLabel.setText(customer.getMobilePhoneNumber());
         emailLabel.setText(customer.getEmail());
         cardNumberLabel.setText(creditCard.getCardNumber());
+        cardHolderLabel.setText(creditCard.getHoldersName());
+        cardValidDateLabel.setText(creditCard.getValidMonth() + "/" + creditCard.getValidYear());
+        cardTypeLabel.setText(creditCard.getCardType());
         cvvLabel.setText(creditCard.getVerificationCode() + "");
+        dateLabel.setText(deliveryDate.toString());
+        timeLabel.setText(deliveryTime);
+        emptyCartButton.setDisable(true);
+        toRegisterButton.setDisable(true);
+        confirmPane.toFront();
     }
 
     @FXML
@@ -617,8 +672,10 @@ public class Controller implements Initializable {
 
     @FXML
     private void toOrderConfirmed(){
-        orderConfirmed.toFront();
-        placeOrder();
+        if(!(sc.getItems().size() == 0)) {
+            orderConfirmed.toFront();
+            placeOrder();
+        }
     }
 
     @FXML
@@ -650,5 +707,23 @@ public class Controller implements Initializable {
             }
         }
         updateShoppingList();
+    }
+
+    @FXML
+    private void deleteCheck(){
+        emptyShoppingCartPane.toFront();
+    }
+
+    @FXML
+    private void deleteShoppingCart(){
+        removeAllItems();
+    }
+
+    private void removeAllItems(){
+        if(sc.getItems().size() > 0) {
+            for (int i = sc.getItems().size(); i > 0; i++) {
+                sc.removeItem(sc.getItems().get(i));
+            }
+        }
     }
 }

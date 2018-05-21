@@ -1,14 +1,36 @@
 .label {
     -fx-font-family: "Montserrat";
+    -fx-font-size: 18px;
 }
 
 .button {
     -fx-font-family: "Montserrat";
+    -fx-font-size: 18px;
+}
+
+.text-field{
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 18px;
+}
+
+.check-box{
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 18px;
+}
+
+.check-box:hover{
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 18px;
+}       
+
+.combo-box{
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 18px;
 }
 
 .logo {
     -fx-font-family: "Poiret One", cursive;
-    -fx-font-size: 40px;
+    -fx-font-size: 54px;
 }
 
 .normal-text {
@@ -20,13 +42,14 @@
 
 .category-item {
     -fx-border-width: 1px;
-    -fx-border-color: #999999;
-    -fx-border-radius: 1px;
-    -fx-background-radius: 1px;
+    -fx-border-color: #bdbdbd;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: #eeeeee;
 }
 
 .category-item:hover {
-    -fx-background-color: #fcfcfc;
+    -fx-background-color: #ffffff;
 }
 
 .category-item:pressed {
@@ -40,8 +63,8 @@
 .product-item{
     -fx-border-width: 1px;
     -fx-border-color: #999999;
-    -fx-border-radius: 1px;
-    -fx-background-radius: 1px;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
     -fx-background-color: #ffffff;
 }
 
@@ -51,4 +74,96 @@
     -fx-border-radius: 1px;
     -fx-background-radius: 1px;
     -fx-background-color: #ffffff;
+}
+
+.category-background{
+    -fx-background-color: #bdbdbd;
+}
+
+.page-title{
+    -fx-font-size: 36px;
+}
+
+.back-button{
+    -fx-background-color: #b3e5fc;
+    -fx-background-radius: 2px;
+    -fx-border-width: 1px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 2px;
+}
+
+.back-button:hover {
+    -fx-background-color: #e3ffff;
+}
+
+.back-button:pressed {
+    -fx-background-color: #81b9bf;
+}
+
+.product-title{
+    -fx-font-size: 24px;
+}
+
+.shopping-cart-button{
+    -fx-font-size: 14px;
+}
+
+.register-button{
+    -fx-background-color: #9ccc65;
+    -fx-background-radius: 2px;
+    -fx-border-width: 1px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 2px;
+}
+
+.register-button:hover{
+    -fx-background-color: #cfff95;
+}
+
+.register-button:pressed{
+    -fx-background-color: #6b9b37;
+}
+
+.purchased-confirmed{
+    -fx-background-color: #b2ff59;
+}
+
+.delete-button{
+    fx-font-size: 11px;
+}
+
+.category-title{
+    -fx-font-weight: bold;
+}
+
+.add-button{
+    -fx-background-color: #c5e1a5;
+    -fx-background-radius: 2px;
+    -fx-border-width: 1px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 2px;
+}
+
+.add-button:hover{
+    -fx-background-color: #f8ffd7;
+}
+
+.add-button:pressed{
+    -fx-background-color: #94af76;
+}
+
+.remove-button{
+    -fx-background-color: #ff8a80;
+    -fx-background-radius: 2px;
+    -fx-border-width: 1px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 2px;
+}
+
+.remove-button:hover{
+    -fx-background-color: #ffbcaf;
+}
+
+.remove-button:pressed{
+    -fx-background-color: #c85a54;
 }

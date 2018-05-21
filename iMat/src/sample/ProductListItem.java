@@ -41,13 +41,13 @@ public class ProductListItem extends AnchorPane {
         productName.setText(product.getName());
         productInfo.setText(product.getPrice() + product.getUnit());
         productImage.setImage(parentController.dh.getFXImage(product));
-        productAmount.setText((int)amount + "");
+        productAmount.setText(amount + "");
         Image img;
         if(parentController.dh.isFavorite(product)){
-            img = new Image(ProductListItem.class.getResourceAsStream("baseline_favorite_black_18dp.png"));
+            img = new Image(ProductListItem.class.getResourceAsStream("resources/baseline_favorite_black_18dp.png"));
             favoriteImage.setImage(img);
         } else {
-            img = new Image(ProductListItem.class.getResourceAsStream("baseline_favorite_border_black_18dp.png"));
+            img = new Image(ProductListItem.class.getResourceAsStream("resources/baseline_favorite_border_black_18dp.png"));
             favoriteImage.setImage(img);
         }
 
@@ -58,29 +58,35 @@ public class ProductListItem extends AnchorPane {
     }
 
     @FXML private void incAmount(){
-        if(amount < 1000)
-            amount += 1;
-            productAmount.setText((int)amount + "");
+        if(amount < 1000) {
+            if (product.getUnitSuffix().equals("kg")) {
+                amount += 0.1;
+            } else {
+                amount += 1;
+            }
+            productAmount.setText(String.format("%n%.2f", amount));
+        }
     }
 
-    @FXML private void decAmount(){
-        if(amount > 1)
-            amount -= 1;
-            productAmount.setText((int)amount + "");
-    }
-
-    @FXML private void showProductInfo(){
-        parentController.showProductInfo(product);
+    @FXML private void decAmount() {
+        if (product.getUnitSuffix().equals("kg")) {
+            if (amount > 0.1)
+                amount -= 0.1;
+        } else {
+            if (amount > 1)
+                amount -= 1;
+        }
+        productAmount.setText(String.format("%n%.2f", amount));
     }
 
     @FXML private void setFavorite(){
         Image img;
         if(parentController.dh.isFavorite(product)){
-            img = new Image(ProductListItem.class.getResourceAsStream("baseline_favorite_border_black_18dp.png"));
+            img = new Image(ProductListItem.class.getResourceAsStream("resources/baseline_favorite_border_black_18dp.png"));
             favoriteImage.setImage(img);
             parentController.removeFavorite(product);
         } else {
-            img = new Image(ProductListItem.class.getResourceAsStream("baseline_favorite_black_18dp.png"));
+            img = new Image(ProductListItem.class.getResourceAsStream("resources/baseline_favorite_black_18dp.png"));
             favoriteImage.setImage(img);
             parentController.setFavrite(product);
         }

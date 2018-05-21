@@ -34,12 +34,38 @@ public class ShoppingCartListItem extends AnchorPane {
         this.parentController = controller;
 
         productName.setText(shoppingItem.getProduct().getName());
-        itemAmount.setText((int)shoppingItem.getAmount() + " " + shoppingItem.getProduct().getUnitSuffix());
+        itemAmount.setText(String.format("%n%.2f", shoppingItem.getAmount()) + " " + shoppingItem.getProduct().getUnitSuffix());
         itemImage.setImage(parentController.dh.getFXImage(shoppingItem.getProduct()));
     }
 
     @FXML
     private void removeItem(){
-        parentController.removeFromShoppingCart(shoppingItem);
+        parentController.removeCheck(shoppingItem);
+    }
+
+    @FXML private void incAmount(){
+        double amount = shoppingItem.getAmount();
+        if(amount < 1000) {
+            if (shoppingItem.getProduct().getUnitSuffix().equals("kg")) {
+                amount += 0.1;
+            } else {
+                amount += 1;
+            }
+            shoppingItem.setAmount(amount);
+            itemAmount.setText(String.format("%n%.2f", amount) + " " + shoppingItem.getProduct().getUnitSuffix());
+        }
+    }
+
+    @FXML private void decAmount() {
+        double amount = shoppingItem.getAmount();
+        if (shoppingItem.getProduct().getUnitSuffix().equals("kg")) {
+            if (amount > 0.1)
+                amount -= 0.1;
+        } else {
+            if (amount > 1)
+                amount -= 1;
+        }
+        shoppingItem.setAmount(amount);
+        itemAmount.setText(String.format("%n%.2f", amount) + " " + shoppingItem.getProduct().getUnitSuffix());
     }
 }
