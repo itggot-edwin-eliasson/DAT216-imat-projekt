@@ -126,6 +126,8 @@
 
 .purchased-confirmed{
     -fx-background-color: #b2ff59;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
 }
 
 .delete-button{
@@ -166,4 +168,37 @@
 
 .remove-button:pressed{
     -fx-background-color: #c85a54;
+}
+
+.error-message {
+    -fx-text-fill: #cc0000;
+}
+
+.tooltip {
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 14px;
+}
+
+.welcome-text{
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 60px;
+}
+
+.welcome-logo{
+    -fx-font-family: "Poiret One";
+    -fx-font-size: 60px;
+}
+
+.info-text{
+    -fx-font-size: 30px;
+}
+
+.start-button {
+    -fx-font-size: 22px;
+}
+
+.wizard-selected {
+    -fx-font-size: 22px;
+    -fx-background-color: #9ccc65;
+    -fx-background-radius: 2px;
 }

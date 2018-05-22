@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,7 +52,42 @@ public class ProductListItem extends AnchorPane {
             img = new Image(ProductListItem.class.getResourceAsStream("resources/baseline_favorite_border_black_18dp.png"));
             favoriteImage.setImage(img);
         }
+        setTextField();
 
+    }
+
+    public void setAmount(double amount){
+        this.amount = amount;
+        productAmount.setText(this.amount + "");
+    }
+
+    private void setTextField(){
+        productAmount.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    //focusgained - do nothing
+                } else{
+                    if(!productAmount.getText().isEmpty()) {
+                        amount = Double.valueOf(productAmount.getText().replaceAll(",", "."));
+                    } else {
+                        amount = 1.0;
+                    }
+                }
+            }
+        });
+        productAmount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("((\\\\d*)|(\\\\d+\\.\\\\d*))")) {
+                    productAmount.setText(newValue.replaceAll("((\\\\d*)|(\\\\d+\\.\\\\d*))", ""));
+                }
+                if(productAmount.getText().length() > 6){
+                    productAmount.setText(productAmount.getText().substring(0, 6));
+                }
+            }
+        });
     }
 
     @FXML public void addToCart(){

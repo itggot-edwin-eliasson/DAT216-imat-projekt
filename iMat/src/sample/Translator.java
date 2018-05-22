@@ -68,7 +68,7 @@ public class Translator {
                 categoryName = "Rootfrukter";
                 break;
             case FRUIT:
-                categoryName = "Frukt";
+                categoryName = "Stenfrukter";
                 break;
             case SWEET:
                 categoryName = "Sötsaker";

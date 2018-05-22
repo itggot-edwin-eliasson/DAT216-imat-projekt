@@ -31,27 +31,20 @@ public class Controller implements Initializable {
     private String password;
     private String search;
     private Order tmpOrder;
-    private LocalDate deliveryDate;
+    private LocalDate deliveryDate = null;
     private String deliveryTime = "";
     private ShoppingItem tmpItem;
 
     @FXML private FlowPane categoryMenu;
     @FXML private FlowPane productListFlowPane;
     @FXML private FlowPane shoppingCartFlowPane;
-    @FXML private FlowPane shoppingCartPreview;
-    @FXML private ScrollPane listView;
+    @FXML private AnchorPane listView;
     @FXML private AnchorPane registerPane;
     @FXML private AnchorPane storePane;
-    @FXML private AnchorPane registerStart;
-    @FXML private AnchorPane registerEnd;
-    @FXML private AnchorPane registerRegisterPane;
-    @FXML private AnchorPane registerEditInformation;
-    @FXML private Label totalPrice;
     @FXML private FlowPane navMenu;
     @FXML private FlowPane orderHistoryFlowPane;
     @FXML private AnchorPane orderHistoryPane;
     @FXML private SplitPane storeSplitPane;
-    @FXML private AnchorPane registerLogin;
     @FXML private AnchorPane paymentPane;
     @FXML private AnchorPane confirmPane;
     @FXML private AnchorPane orderConfirmed;
@@ -67,6 +60,8 @@ public class Controller implements Initializable {
     @FXML private AnchorPane emptyShoppingCartPane;
     @FXML private Button toRegisterButton;
     @FXML private Button emptyCartButton;
+    @FXML private Label categoryTitle;
+    @FXML private AnchorPane startPane;
 
     @FXML private TextField firstNameField;
     @FXML private TextField surnameField;
@@ -103,14 +98,27 @@ public class Controller implements Initializable {
     @FXML private Label cardTypeLabel;
     @FXML private Label cardValidDateLabel;
     @FXML private Label cardHolderLabel;
+    @FXML private Label confirmedTimeLabel;
 
-    @FXML private TextField usernameLoginRegister;
-    @FXML private PasswordField passwordLoginRegister;
-    @FXML private TextField usernameRegisterRegister;
-    @FXML private PasswordField passwordRegisterRegister;
+    @FXML private Label firstNameErrorMessage;
+    @FXML private Label lastNameErrorMessage;
+    @FXML private Label adressErrorMessage;
+    @FXML private Label postNumberErrorMessage;
+    @FXML private Label cityErrorMessage;
+    @FXML private Label phoneErrorMessage;
+    @FXML private Label mobilePhoneErrorMessage;
+    @FXML private Label emailErrorMessage;
+    @FXML private Label cardHolderErrorMessage;
+    @FXML private Label cardTypeErrorMessage;
+    @FXML private Label dateErrorMessage;
+    @FXML private Label cardNumberErrorMessage;
+    @FXML private Label cvvErrorMessage;
+    @FXML private Label deliveryDateErrorMessage;
+    @FXML private Label deliveryTimeErrorMessage;
 
 
     private Map<String, ProductListItem> productListItemMap = new HashMap<String, ProductListItem>();
+    private Map<String, CategoryListItem> categoryListItemMap = new HashMap<String, CategoryListItem>();
 
 
     @Override
@@ -118,6 +126,11 @@ public class Controller implements Initializable {
         for(Product product : dh.getProducts()){
             ProductListItem item = new ProductListItem(product, this);
             productListItemMap.put(product.getName(), item);
+        }
+
+        for(ProductCategory p : pc){
+            CategoryListItem item = new CategoryListItem(p, this);
+            categoryListItemMap.put(tr.translate(p), item);
         }
 
         updateProductList();
@@ -130,10 +143,8 @@ public class Controller implements Initializable {
         setCardYearComboBox();
         setDatePicker();
         setCheckBox();
-        registerStart.toFront();
         storePane.toFront();
-        listView.toFront();
-
+        startPane.toFront();
     }
 
     private void updateProductList(){
@@ -142,6 +153,7 @@ public class Controller implements Initializable {
         ProductListItem item;
         for(int i = 0; i < products.size(); i++){
             item = productListItemMap.get(products.get(i).getName());
+            item.setAmount(1.0);
             productListFlowPane.getChildren().add(item);
         }
     }
@@ -157,8 +169,10 @@ public class Controller implements Initializable {
 
     private void setCategory() {
         categoryMenu.getChildren().clear();
+        CategoryListItem item;
         for(int i = 0; i < pc.length; i++){
-            CategoryListItem item = new CategoryListItem(pc[i], this);
+            item = categoryListItemMap.get(tr.translate(pc[i]));
+            item.unselectedBackground();
             categoryMenu.getChildren().add(item);
         }
     }
@@ -190,7 +204,7 @@ public class Controller implements Initializable {
         ProductListItem item;
         for(int i = 0; i < items.size(); i++){
             item = productListItemMap.get(items.get(i).getProduct().getName());
-            item.amount = items.get(i).getAmount();
+            item.setAmount(items.get(i).getAmount());
             orderFlowPane.getChildren().add(item);
         }
     }
@@ -212,6 +226,7 @@ public class Controller implements Initializable {
         ProductListItem item;
         for(int i = 0; i < favoritesList.size(); i++){
             item = productListItemMap.get(favoritesList.get(i).getName());
+            item.setAmount(1.0);
             favoritesFlowPane.getChildren().add(item);
         }
     }
@@ -224,7 +239,7 @@ public class Controller implements Initializable {
                     //focusgained - do nothing
                 } else{
                     customer.setFirstName(firstNameField.getText());
-
+                    firstNameErrorMessage.setText("");
                 }
             }
         });
@@ -235,7 +250,7 @@ public class Controller implements Initializable {
                     //focusgained - do nothing
                 } else{
                     customer.setLastName(surnameField.getText());
-
+                    lastNameErrorMessage.setText("");
                 }
             }
         });
@@ -245,8 +260,8 @@ public class Controller implements Initializable {
                 if(newValue){
                     //focusgained - do nothing
                 } else{
-                    customer.setAddress(firstNameField.getText());
-
+                    customer.setAddress(streetField.getText());
+                    adressErrorMessage.setText("");
                 }
             }
         });
@@ -257,6 +272,19 @@ public class Controller implements Initializable {
                     //focusgained - do nothing
                 } else{
                     customer.setPostCode(postNumberField.getText());
+                    postNumberErrorMessage.setText("");
+                }
+            }
+        });
+        postNumberField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    postNumberField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+                if (postNumberField.getText().length() > 6){
+                    postNumberField.setText(postNumberField.getText().substring(0, 6));
                 }
             }
         });
@@ -266,7 +294,8 @@ public class Controller implements Initializable {
                 if(newValue){
                     //focusgained - do nothing
                 } else{
-                    customer.setPostAddress(firstNameField.getText());
+                    customer.setPostAddress(cityField.getText());
+                    cityErrorMessage.setText("");
                 }
             }
         });
@@ -277,6 +306,16 @@ public class Controller implements Initializable {
                     //focusgained - do nothing
                 } else{
                     customer.setPhoneNumber(phoneField.getText());
+                    phoneErrorMessage.setText("");
+                }
+            }
+        });
+        phoneField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    phoneField.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
@@ -287,6 +326,16 @@ public class Controller implements Initializable {
                     //focusgained - do nothing
                 } else{
                     customer.setMobilePhoneNumber(mobilePhoneField.getText());
+                    mobilePhoneErrorMessage.setText("");
+                }
+            }
+        });
+        mobilePhoneField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    mobilePhoneField.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
@@ -295,8 +344,13 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if(newValue){
                     //focusgained - do nothing
-                } else{
-                    customer.setEmail(e_mailField.getText());
+                } else {
+                    if (e_mailField.getText().contains("@")){
+                        customer.setEmail(e_mailField.getText());
+                        emailErrorMessage.setText("");
+                    }else{
+                        emailErrorMessage.setText("Ogiltig mailaddress");
+                    }
                 }
             }
         });
@@ -307,6 +361,7 @@ public class Controller implements Initializable {
                     //focusgained - do nothing
                 } else {
                     creditCard.setHoldersName(cardHolderField.getText());
+                    cardHolderErrorMessage.setText("");
                 }
             }
         });
@@ -317,6 +372,7 @@ public class Controller implements Initializable {
                     //focusgained - do nothing
                 } else {
                     creditCard.setCardNumber(cardNumberField.getText());
+                    cardNumberErrorMessage.setText("");
                 }
             }
         });
@@ -327,6 +383,9 @@ public class Controller implements Initializable {
                 if (!newValue.matches("\\d*")) {
                     cardNumberField.setText(newValue.replaceAll("[^\\d]", ""));
                 }
+                if(cardNumberField.getText().length() > 16){
+                    cardNumberField.setText(cardNumberField.getText().substring(0, 16));
+                }
             }
         });
         cvvField.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -336,7 +395,7 @@ public class Controller implements Initializable {
                     //focusgained - do nothing
                 } else{
                     creditCard.setVerificationCode(Integer.valueOf(cvvField.getText()));
-
+                    cvvErrorMessage.setText("");
                 }
             }
         });
@@ -346,6 +405,9 @@ public class Controller implements Initializable {
                                 String newValue) {
                 if (!newValue.matches("\\d*")) {
                     cvvField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+                if(cvvField.getText().length() > 3){
+                    cvvField.setText(cvvField.getText().substring(0, 3));
                 }
             }
         });
@@ -362,6 +424,7 @@ public class Controller implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 creditCard.setCardType(newValue);
+                cardTypeErrorMessage.setText("");
             }
         });
     }
@@ -372,6 +435,7 @@ public class Controller implements Initializable {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 creditCard.setValidMonth(Integer.valueOf(newValue.toString()));
+                dateErrorMessage.setText("");
             }
         });
     }
@@ -382,6 +446,7 @@ public class Controller implements Initializable {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 creditCard.setValidYear(Integer.valueOf(newValue.toString()));
+                dateErrorMessage.setText("");
             }
         });
     }
@@ -389,56 +454,135 @@ public class Controller implements Initializable {
     private void setDatePicker(){
         date.valueProperty().addListener((ov, oldValue, newValue) -> {
             deliveryDate = (newValue);
+            deliveryDateErrorMessage.setText("");
         });
     }
 
     private void setCheckBox(){
         timeAllDay.selectedProperty().addListener(new ChangeListener<Boolean>() {
             public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
-                deliveryTime = timeAllDay.getText();
+                if(new_val) {
+                    deliveryTime = timeAllDay.getText();
+                    deliveryTimeErrorMessage.setText("");
+                } else {
+                    if (timeEight.isSelected() && timeOne.isSelected() && timeFour.isSelected()) {
+                        deliveryTime = "08.00 - 20.00";
+                    } else if (timeEight.isSelected() && timeOne.isSelected()) {
+                        deliveryTime = "08.00 - 16.00";
+                    } else if (timeEight.isSelected() && timeFour.isSelected()) {
+                        deliveryTime = "08.00 - 12.00\n16.00 - 20.00";
+                    } else if (timeOne.isSelected() && timeFour.isSelected()){
+                        deliveryTime = "12.00 - 20.00";
+                    } else if (timeEight.isSelected()){
+                        deliveryTime = timeEight.getText();
+                    } else if (timeOne.isSelected()){
+                        deliveryTime = timeOne.getText();
+                    } else if (timeFour.isSelected()){
+                        deliveryTime = timeFour.getText();
+                    } else {
+                        deliveryTime = "";
+                    }
+                }
             }
         });
         timeEight.selectedProperty().addListener(new ChangeListener<Boolean>() {
             public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
-                if (!deliveryTime.equals("") && !deliveryTime.equals(timeAllDay.getText())){
-                    deliveryTime += "\neller " + timeEight.getText();
-                } else if(deliveryTime.equals(timeAllDay.getText())){
-                    //do nothing
+                if(new_val) {
+                    if (timeAllDay.isSelected()){
+                        //do nothing
+                    } else if (timeOne.isSelected() && timeFour.isSelected()){
+                        deliveryTime = "08.00 - 20.00";
+                    } else if (timeOne.isSelected()){
+                        deliveryTime = "08.00 - 16.00";
+                    } else if (timeFour.isSelected()){
+                        deliveryTime = "08.00 - 12.00\n16.00 - 20.00";
+                    } else {
+                        deliveryTime = timeEight.getText();
+                    }
+                    deliveryTimeErrorMessage.setText("");
                 } else {
-                    deliveryTime = timeEight.getText();
+                    if (timeAllDay.isSelected()){
+                        deliveryTime = timeAllDay.getText();
+                    } else if(timeOne.isSelected() && timeFour.isSelected()){
+                        deliveryTime = "12.00 - 20.00";
+                    } else if (timeOne.isSelected()){
+                        deliveryTime = timeOne.getText();
+                    } else if (timeFour.isSelected()){
+                        deliveryTime = timeFour.getText();
+                    } else {
+                        deliveryTime = "";
+                    }
                 }
             }
         });
         timeOne.selectedProperty().addListener(new ChangeListener<Boolean>() {
             public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
-                if (!deliveryTime.equals("") && !deliveryTime.equals(timeAllDay.getText())) {
-                    deliveryTime += "\neller " + timeOne.getText();
-                } else if (deliveryTime.equals(timeAllDay.getText())) {
-                    //do nothing
+                if(new_val) {
+                    if (timeAllDay.isSelected()){
+                        //do nothing
+                    } else if (timeEight.isSelected() && timeFour.isSelected()){
+                        deliveryTime = "08.00 - 20.00";
+                    } else if (timeEight.isSelected()){
+                        deliveryTime = "08.00 - 16.00";
+                    } else if (timeFour.isSelected()){
+                        deliveryTime = "12.00 - 20.00";
+                    } else {
+                        deliveryTime = timeOne.getText();
+                    }
+                    deliveryTimeErrorMessage.setText("");
                 } else {
-                    deliveryTime = timeOne.getText();
+                    if (timeAllDay.isSelected()){
+                        deliveryTime = timeAllDay.getText();
+                    } else if (timeEight.isSelected() && timeFour.isSelected()) {
+                        deliveryTime = "08.00 - 12.00\n16.00 - 20.00";
+                    } else if (timeEight.isSelected()){
+                        deliveryTime = timeEight.getText();
+                    } else  if (timeFour.isSelected()){
+                        deliveryTime = timeFour.getText();
+                    } else {
+                        deliveryTime = "";
+                    }
                 }
             }
         });
         timeFour.selectedProperty().addListener(new ChangeListener<Boolean>() {
             public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) {
-                if (!deliveryTime.equals("") && !deliveryTime.equals(timeAllDay.getText())){
-                    deliveryTime += "\neller " + timeFour.getText();
-                } else if(deliveryTime.equals(timeAllDay.getText())){
-                    //do nothing
+                if(new_val) {
+                    if (timeAllDay.isSelected()){
+                        //do nothing
+                    } else if (timeOne.isSelected() && timeEight.isSelected()){
+                        deliveryTime = "08.00 - 20.00";
+                    } else if (timeOne.isSelected()){
+                        deliveryTime = "12.00 - 20.00";
+                    } else if (timeEight.isSelected()){
+                        deliveryTime = "08.00 - 12.00\n16.00 - 20.00";
+                    } else {
+                        deliveryTime = timeFour.getText();
+                    }
+                    deliveryTimeErrorMessage.setText("");
                 } else {
-                    deliveryTime = timeFour.getText();
+                    if (timeAllDay.isSelected()){
+                        deliveryTime = timeAllDay.getText();
+                    } else if (timeEight.isSelected() && timeOne.isSelected()) {
+                        deliveryTime = "08.00 - 16.00";
+                    } else if (timeEight.isSelected()){
+                        deliveryTime = timeEight.getText();
+                    } else if (timeOne.isSelected()){
+                        deliveryTime = timeOne.getText();
+                    } else {
+                        deliveryTime = "";
+                    }
                 }
             }
         });
     }
 
-
     public void addToShoppingCart(Product product, double amount){
         boolean contains = false;
         for(int i = 0; i < sc.getItems().size(); i++){
-            if(product.getName() == sc.getItems().get(i).getProduct().getName()){
+            if(product.getName().equals(sc.getItems().get(i).getProduct().getName())){
                 contains = true;
+                sc.getItems().get(i).setAmount(amount);
                 break;
             }
         }
@@ -453,6 +597,10 @@ public class Controller implements Initializable {
     public void removeCheck(ShoppingItem item){
         deleteProductPane.toFront();
         tmpItem = item;
+    }
+
+    public void updateTotalPrice(){
+        shoppingCartPrice.setText(String.format("%n%.2f", sc.getTotal()) + " kr");
     }
 
     @FXML
@@ -471,17 +619,26 @@ public class Controller implements Initializable {
         emptyShoppingCartPane.toBack();
     }
 
-    public void getCategory(ProductCategory category){
+    public void getCategory(ProductCategory category, String categoryName){
+        setCategory();
+        categoryListItemMap.get(categoryName).selectedBackground();
         listView.toFront();
         updateProductList(dh.getProducts(category));
+        categoryTitle.setText("Vald kategori: " + categoryName);
+    }
+
+    public void getCategory(){
+        updateProductList();
+        categoryTitle.setText("Vald kategori: Alla");
     }
 
     public void goTo(String navMenuName){
         switch (navMenuName){
             case "Startsida":
                 updateProductList();
-                storePane.toFront();
-                listView.toFront();
+                setCategory();
+                categoryTitle.setText("Vald kategori: Alla");
+                startPane.toFront();
                 break;
             case "Favoriter":
                 favoritesPane.toFront();
@@ -514,10 +671,6 @@ public class Controller implements Initializable {
         orderPane.toFront();
     }
 
-    private void registerEnd(){
-        registerEnd.toFront();
-    }
-
     @FXML
     private void selectListPane(){
         listView.toFront();
@@ -535,42 +688,17 @@ public class Controller implements Initializable {
             mobilePhoneField.setText(customer.getMobilePhoneNumber());
             e_mailField.setText(customer.getEmail());
             registerPane.toFront();
-            registerStart.toFront();
         } else if(sc.getItems().size() != 0){
             registerPane.toFront();
-            registerStart.toFront();
         }
     }
 
     @FXML
     private void toStore(){
+        emptyCartButton.setDisable(false);
+        toRegisterButton.setDisable(false);
         storePane.toFront();
         listView.toFront();
-    }
-
-    @FXML
-    private void toRegisterInformation(){
-        registerEditInformation.toFront();
-    }
-
-    @FXML
-    private void toRegisterRegister(){
-        registerRegisterPane.toFront();
-    }
-
-    @FXML
-    private void toRegisterLogin(){
-        registerLogin.toFront();
-    }
-
-    @FXML
-    private void toRegisterEnd(){
-        registerEnd.toFront();
-    }
-
-    @FXML
-    private void toRegisterStart(){
-        registerStart.toFront();
     }
 
     @FXML
@@ -583,47 +711,39 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void loginFromRegister(){
-        User tmpUser = dh.getUser();
-        if(username.equals(tmpUser.getUserName())){
-            if(password.equals(tmpUser.getPassword())){
-                user = tmpUser;
-                user.setPassword(password);
-                user.setUserName(username);
-                registerEnd.toFront();
-            }else{
-                passwordLoginRegister.focusedProperty();
-                //passwordLoginError.setText("Wrong password");
+    private void toPayment(){
+        if(e_mailField.getText().contains("@")) {
+            if (dh.isCustomerComplete()) {
+                paymentPane.toFront();
+            } else {
+                if (firstNameField.getText().isEmpty()) {
+                    firstNameErrorMessage.setText("Fyll i fältet");
+                }
+                if (surnameField.getText().isEmpty()) {
+                    lastNameErrorMessage.setText("Fyll i fältet");
+                }
+                if (streetField.getText().isEmpty()) {
+                    adressErrorMessage.setText("Fyll i fältet");
+                }
+                if (postNumberField.getText().isEmpty()) {
+                    postNumberErrorMessage.setText("Fyll i fältet");
+                }
+                if (cityField.getText().isEmpty()) {
+                    cityErrorMessage.setText("Fyll i fältet");
+                }
+                if (phoneField.getText().isEmpty()) {
+                    phoneErrorMessage.setText("Fyll i fältet");
+                }
+                if (mobilePhoneField.getText().isEmpty()) {
+                    mobilePhoneErrorMessage.setText("Fyll i fältet");
+                }
+                if (e_mailField.getText().isEmpty()) {
+                    emailErrorMessage.setText("Fyll i fältet");
+                }
             }
-        }else{
-            usernameLoginRegister.focusedProperty();
-            //usernameLoginError.setText("Wrong username");
+        } else {
+            emailErrorMessage.setText("Ogiltig mailaddress");
         }
-    }
-
-    @FXML
-    private void registerFromRegister(){
-        if (!username.equals("") && !password.equals("")) {
-            user = dh.getUser();
-            user.setUserName(username);
-            user.setPassword(password);
-            registerEnd.toFront();
-        }
-    }
-
-    @FXML
-    private void backFromRegisterLogin(){
-        registerLogin.toBack();
-    }
-
-    @FXML
-    private void backFromRegisterRegister(){
-        registerRegisterPane.toBack();
-    }
-
-    @FXML
-    private void backFromRegisterInformation(){
-        registerEditInformation.toBack();
     }
 
     @FXML
@@ -632,41 +752,78 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void toPayment(){
-        if(dh.isCustomerComplete()) {
-            paymentPane.toFront();
-        }
-    }
-
-    @FXML
     private void backFromPayment(){
-        paymentPane.toBack();;
+        paymentPane.toBack();
     }
 
     @FXML
     private void toConfirm(){
-        firstNameLabel.setText(customer.getFirstName());
-        surnameLabel.setText(customer.getLastName());
-        streetLabel.setText(customer.getAddress());
-        postNumberLabel.setText(customer.getPostCode());
-        cityLabel.setText(customer.getPostAddress());
-        phoneLabel.setText(customer.getPhoneNumber());
-        mobilePhoneLabel.setText(customer.getMobilePhoneNumber());
-        emailLabel.setText(customer.getEmail());
-        cardNumberLabel.setText(creditCard.getCardNumber());
-        cardHolderLabel.setText(creditCard.getHoldersName());
-        cardValidDateLabel.setText(creditCard.getValidMonth() + "/" + creditCard.getValidYear());
-        cardTypeLabel.setText(creditCard.getCardType());
-        cvvLabel.setText(creditCard.getVerificationCode() + "");
-        dateLabel.setText(deliveryDate.toString());
-        timeLabel.setText(deliveryTime);
-        emptyCartButton.setDisable(true);
-        toRegisterButton.setDisable(true);
-        confirmPane.toFront();
+        boolean check = true;
+        if(cardHolderField.getText().isEmpty()){
+            cardHolderErrorMessage.setText("Fyll i fältet");
+            check = false;
+        }
+        if(cardType.getSelectionModel().isEmpty()){
+            cardTypeErrorMessage.setText("Välj ett alternativ");
+            check = false;
+        }
+        if(cardMonth.getSelectionModel().isEmpty() || cardYear.getSelectionModel().isEmpty()){
+            dateErrorMessage.setText("Välj ett alternativ");
+            check = false;
+        }
+        if(cardNumberField.getText().isEmpty()){
+            cardNumberErrorMessage.setText("Fyll i fältet");
+            check = false;
+        }
+        if(cardNumberField.getText().length() < 16){
+            cardNumberErrorMessage.setText("Fel kortnummer");
+            check = false;
+        }
+        if(cvvField.getText().isEmpty()){
+            cvvErrorMessage.setText("Fyll i fältet");
+            check = false;
+        }
+        if(cvvField.getText().length() < 3){
+            cvvErrorMessage.setText("Fel kod");
+            check = false;
+        }
+        if(deliveryDate == null){
+            deliveryDateErrorMessage.setText("Välj ett datum");
+            check = false;
+        } else if(deliveryDate.isBefore(LocalDate.now())){
+            deliveryDateErrorMessage.setText("Ogiltigt\nleveransdatum");
+            check = false;
+        }
+        if(deliveryTime.isEmpty()){
+            deliveryTimeErrorMessage.setText("Välj en tid");
+            check = false;
+        }
+        if(check){
+            firstNameLabel.setText(customer.getFirstName());
+            surnameLabel.setText(customer.getLastName());
+            streetLabel.setText(customer.getAddress());
+            postNumberLabel.setText(customer.getPostCode());
+            cityLabel.setText(customer.getPostAddress());
+            phoneLabel.setText(customer.getPhoneNumber());
+            mobilePhoneLabel.setText(customer.getMobilePhoneNumber());
+            emailLabel.setText(customer.getEmail());
+            cardNumberLabel.setText(creditCard.getCardNumber());
+            cardHolderLabel.setText(creditCard.getHoldersName());
+            cardValidDateLabel.setText(creditCard.getValidMonth() + "/" + creditCard.getValidYear());
+            cardTypeLabel.setText(creditCard.getCardType());
+            cvvLabel.setText(creditCard.getVerificationCode() + "");
+            dateLabel.setText(deliveryDate.toString());
+            timeLabel.setText(deliveryTime);
+            emptyCartButton.setDisable(true);
+            toRegisterButton.setDisable(true);
+            confirmPane.toFront();
+        }
     }
 
     @FXML
     private void backFromConfirm(){
+        toRegisterButton.setDisable(false);
+        emptyCartButton.setDisable(false);
         confirmPane.toBack();
     }
 
@@ -674,6 +831,7 @@ public class Controller implements Initializable {
     private void toOrderConfirmed(){
         if(!(sc.getItems().size() == 0)) {
             orderConfirmed.toFront();
+            confirmedTimeLabel.setText("Din order levereras:\n" + deliveryDate.toString() + "\n" + deliveryTime);
             placeOrder();
         }
     }
@@ -702,8 +860,12 @@ public class Controller implements Initializable {
     private void addFullOrderToShoppingCart(){
         List<ShoppingItem> items = tmpOrder.getItems();
         for(int i = 0; i < items.size(); i++){
-            if(!sc.getItems().contains(items.get(i))){
-                sc.addItem(items.get(i));
+            for(int j = 0; j < sc.getItems().size(); j++) {
+                if (!items.get(i).getProduct().getName().equals(sc.getItems().get(j).getProduct().getName())) {
+                    sc.addItem(items.get(i));
+                } else {
+                    sc.getItems().get(j).setAmount(items.get(i).getAmount());
+                }
             }
         }
         updateShoppingList();
@@ -711,19 +873,28 @@ public class Controller implements Initializable {
 
     @FXML
     private void deleteCheck(){
-        emptyShoppingCartPane.toFront();
+        if(sc.getItems().size() > 0) {
+            emptyShoppingCartPane.toFront();
+        }
     }
 
     @FXML
     private void deleteShoppingCart(){
         removeAllItems();
+        emptyShoppingCartPane.toBack();
     }
 
     private void removeAllItems(){
         if(sc.getItems().size() > 0) {
-            for (int i = sc.getItems().size(); i > 0; i++) {
+            for (int i = sc.getItems().size() - 1; i >= 0; i--) {
                 sc.removeItem(sc.getItems().get(i));
             }
         }
+        updateShoppingList();
+    }
+
+    @FXML
+    private void toHelpPane(){
+        helpPane.toFront();
     }
 }
