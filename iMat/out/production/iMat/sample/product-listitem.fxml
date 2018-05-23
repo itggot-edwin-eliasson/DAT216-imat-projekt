@@ -11,11 +11,11 @@
 <fx:root prefHeight="169.0" prefWidth="674.0" styleClass="product-item" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView id="ProductListImage" fx:id="productImage" fitHeight="152.0" fitWidth="211.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
-      <Label id="ProductListHeadline" fx:id="productName" layoutX="235.0" layoutY="31.0" styleClass="product-title" text="Rubrik">
+      <Label id="ProductListHeadline" fx:id="productName" layoutX="235.0" layoutY="14.0" styleClass="product-title" text="Rubrik">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Label id="ProductListText" fx:id="productInfo" layoutX="235.0" layoutY="64.0" text="Text">
+      <Label id="ProductListText" fx:id="productInfo" layoutX="235.0" layoutY="53.0" text="Text">
          <font>
             <Font size="18.0" />
          </font></Label>

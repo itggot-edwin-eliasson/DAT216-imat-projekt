@@ -419,7 +419,7 @@ public class Controller implements Initializable {
     }
 
     private void setCardTypeComboBox(){
-        cardType.getItems().setAll("Matercard", "Visa", "American Express");
+        cardType.getItems().setAll("Mastercard", "Visa", "American Express");
         cardType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -697,6 +697,7 @@ public class Controller implements Initializable {
     private void toStore(){
         emptyCartButton.setDisable(false);
         toRegisterButton.setDisable(false);
+        shoppingCartFlowPane.setDisable(false);
         storePane.toFront();
         listView.toFront();
     }
@@ -712,37 +713,36 @@ public class Controller implements Initializable {
 
     @FXML
     private void toPayment(){
-        if(e_mailField.getText().contains("@")) {
-            if (dh.isCustomerComplete()) {
-                paymentPane.toFront();
-            } else {
-                if (firstNameField.getText().isEmpty()) {
-                    firstNameErrorMessage.setText("Fyll i fältet");
-                }
-                if (surnameField.getText().isEmpty()) {
-                    lastNameErrorMessage.setText("Fyll i fältet");
-                }
-                if (streetField.getText().isEmpty()) {
-                    adressErrorMessage.setText("Fyll i fältet");
-                }
-                if (postNumberField.getText().isEmpty()) {
-                    postNumberErrorMessage.setText("Fyll i fältet");
-                }
-                if (cityField.getText().isEmpty()) {
-                    cityErrorMessage.setText("Fyll i fältet");
-                }
-                if (phoneField.getText().isEmpty()) {
-                    phoneErrorMessage.setText("Fyll i fältet");
-                }
-                if (mobilePhoneField.getText().isEmpty()) {
-                    mobilePhoneErrorMessage.setText("Fyll i fältet");
-                }
-                if (e_mailField.getText().isEmpty()) {
-                    emailErrorMessage.setText("Fyll i fältet");
-                }
-            }
+        if (dh.isCustomerComplete()) {
+            paymentPane.toFront();
         } else {
-            emailErrorMessage.setText("Ogiltig mailaddress");
+            if (firstNameField.getText().isEmpty()) {
+                firstNameErrorMessage.setText("Fyll i fältet");
+            }
+            if (surnameField.getText().isEmpty()) {
+                lastNameErrorMessage.setText("Fyll i fältet");
+            }
+            if (streetField.getText().isEmpty()) {
+                adressErrorMessage.setText("Fyll i fältet");
+            }
+            if (postNumberField.getText().isEmpty()) {
+                postNumberErrorMessage.setText("Fyll i fältet");
+            }
+            if (cityField.getText().isEmpty()) {
+                cityErrorMessage.setText("Fyll i fältet");
+            }
+            if (phoneField.getText().isEmpty()) {
+                phoneErrorMessage.setText("Fyll i fältet");
+            }
+            if (mobilePhoneField.getText().isEmpty()) {
+                mobilePhoneErrorMessage.setText("Fyll i fältet");
+            }
+            if (e_mailField.getText().isEmpty()) {
+                emailErrorMessage.setText("Fyll i fältet");
+            }
+            if(e_mailField.getText().contains("@")){
+                emailErrorMessage.setText("Ogiltig mailaddress");
+            }
         }
     }
 
@@ -816,6 +816,7 @@ public class Controller implements Initializable {
             timeLabel.setText(deliveryTime);
             emptyCartButton.setDisable(true);
             toRegisterButton.setDisable(true);
+            shoppingCartFlowPane.setDisable(true);
             confirmPane.toFront();
         }
     }
