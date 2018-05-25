@@ -35,19 +35,19 @@ public class NavMenuListItem extends AnchorPane {
         Image img;
         switch(menuName){
             case "Startsida":
-                img = new Image(ProductListItem.class.getResourceAsStream("resources/outline_home_black_36dp.png"));
+                img = new Image(ProductListItem.class.getResourceAsStream("resources/outline_home_white_36dp.png"));
                 navImage.setImage(img);
                 break;
             case "Favoriter":
-                img = new Image(ProductListItem.class.getResourceAsStream("resources/outline_favorite_border_black_36dp.png"));
+                img = new Image(ProductListItem.class.getResourceAsStream("resources/outline_favorite_border_white_36dp.png"));
                 navImage.setImage(img);
                 break;
             case "Orderhistorik":
-                img = new Image(ProductListItem.class.getResourceAsStream("resources/outline_query_builder_black_36dp.png"));
+                img = new Image(ProductListItem.class.getResourceAsStream("resources/outline_query_builder_white_36dp.png"));
                 navImage.setImage(img);
                 break;
             case "Hjälp":
-                img = new Image(ProductListItem.class.getResourceAsStream("resources/outline_help_outline_black_36dp.png"));
+                img = new Image(ProductListItem.class.getResourceAsStream("resources/outline_help_outline_white_36dp.png"));
                 navImage.setImage(img);
                 break;
         }

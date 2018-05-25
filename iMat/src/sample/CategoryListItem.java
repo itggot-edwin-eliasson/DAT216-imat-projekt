@@ -38,7 +38,7 @@ public class CategoryListItem extends AnchorPane {
 
     public void selectedBackground(){
         selected = true;
-        background.setStyle("-fx-background-color: #d0d0d0");
+        background.setStyle("-fx-background-color: #1b1b1b");
     }
 
     public void unselectedBackground(){

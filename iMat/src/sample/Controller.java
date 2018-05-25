@@ -716,9 +716,8 @@ public class Controller implements Initializable {
 
     @FXML
     private void toStore(){
-        if(sc.getItems().size() < 0){
+        if(sc.getItems().size() == 0){
             emptyCartButton.setDisable(false);
-            toRegisterButton.setDisable(false);
             shoppingCartFlowPane.setDisable(false);
         }
         storePane.toFront();
@@ -745,13 +744,6 @@ public class Controller implements Initializable {
                 cardYear.getSelectionModel().select(creditCard.getValidYear() + "");
                 cvvField.setText(creditCard.getVerificationCode() + "");
                 cardType.getSelectionModel().select(creditCard.getCardType());
-            }else{
-                System.out.println(creditCard.getCardNumber());
-                System.out.println(creditCard.getCardType());
-                System.out.println(creditCard.getHoldersName());
-                System.out.println(creditCard.getVerificationCode());
-                System.out.println(creditCard.getValidMonth());
-                System.out.println(creditCard.getValidYear());
             }
             paymentPane.toFront();
         } else {
@@ -881,6 +873,9 @@ public class Controller implements Initializable {
     private void search(){
         updateProductList(dh.findProducts(search));
         listView.toFront();
+        emptyCartButton.setDisable(false);
+        toRegisterButton.setDisable(false);
+        shoppingCartFlowPane.setDisable(false);
         if(!searchBarField.getText().isEmpty()) {
             categoryTitle.setText("Resultat:");
         } else{

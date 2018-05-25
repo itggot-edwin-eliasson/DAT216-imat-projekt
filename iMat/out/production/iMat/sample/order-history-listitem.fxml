@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root onMouseClicked="#goToOrder" prefHeight="65.0" prefWidth="676.0" styleClass="category-item" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root onMouseClicked="#goToOrder" prefHeight="65.0" prefWidth="676.0" styleClass="order-history-item" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="orderDate" layoutX="14.0" layoutY="24.0" text="Date goes here" />
       <Label layoutX="452.0" layoutY="24.0" text="Pris:" />
