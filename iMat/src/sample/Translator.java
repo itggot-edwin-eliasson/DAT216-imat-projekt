@@ -2,6 +2,8 @@ package sample;
 
 import se.chalmers.cse.dat216.project.ProductCategory;
 
+import java.awt.color.ProfileDataException;
+
 import static se.chalmers.cse.dat216.project.ProductCategory.*;
 
 public class Translator {
@@ -80,4 +82,76 @@ public class Translator {
         }
         return categoryName;
     }
+
+    public ProductCategory translate(String category){
+        ProductCategory categoryName = null;
+        switch (category) {
+            case "Baljväxter":
+                categoryName = POD;
+                break;
+            case "Bröd":
+                categoryName = BREAD;
+                break;
+            case "Bär":
+                categoryName = BERRY;
+                break;
+            case "Citrus frukter":
+                categoryName = CITRUS_FRUIT;
+                break;
+            case "Drycker varma":
+                categoryName = HOT_DRINKS;
+                break;
+            case "Drycker kalla":
+                categoryName = COLD_DRINKS;
+                break;
+            case "Exotiska frukter":
+                categoryName = EXOTIC_FRUIT;
+                break;
+            case "Fisk":
+                categoryName = FISH;
+                break;
+            case "Grönsaksfrukter":
+                categoryName = VEGETABLE_FRUIT;
+                break;
+            case "Kål":
+                categoryName = CABBAGE;
+                break;
+            case "Kött":
+                categoryName = MEAT;
+                break;
+            case "Mejeri":
+                categoryName = DAIRIES;
+                break;
+            case "Meloner":
+                categoryName = MELONS;
+                break;
+            case "Mjöl, socker och salt":
+                categoryName = FLOUR_SUGAR_SALT;
+                break;
+            case "Nötter och frön":
+                categoryName = NUTS_AND_SEEDS;
+                break;
+            case "Pasta":
+                categoryName = PASTA;
+                break;
+            case "Potatis och ris":
+                categoryName = POTATO_RICE;
+                break;
+            case "Rootfrukter":
+                categoryName = ROOT_VEGETABLE;
+                break;
+            case "Stenfrukter":
+                categoryName = FRUIT;
+                break;
+            case "Sötsaker":
+                categoryName = SWEET;
+                break;
+            case "Örter":
+                categoryName = HERB;
+                break;
+
+        }
+        return categoryName;
+    }
+
 }

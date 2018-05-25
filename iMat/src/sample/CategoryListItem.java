@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class CategoryListItem extends AnchorPane {
 
-    ProductCategory category;
+    String category;
     Controller parentController;
     Translator tr = new Translator();
     private boolean selected = false;
@@ -18,7 +18,7 @@ public class CategoryListItem extends AnchorPane {
     @FXML private Label categoryName;
     @FXML private AnchorPane background;
 
-    public CategoryListItem(ProductCategory category, Controller controller) {
+    public CategoryListItem(String category, Controller controller) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("category-listitem.fxml"));
         fxmlLoader.setRoot(this);
@@ -33,14 +33,16 @@ public class CategoryListItem extends AnchorPane {
         this.category = category;
         this.parentController = controller;
 
-        categoryName.setText(tr.translate(category));
+        categoryName.setText(category);
     }
 
     public void selectedBackground(){
+        selected = true;
         background.setStyle("-fx-background-color: #d0d0d0");
     }
 
     public void unselectedBackground(){
+        selected = false;
         background.setStyle(null);
     }
 
@@ -48,7 +50,7 @@ public class CategoryListItem extends AnchorPane {
     private void searchCategory(){
         if(!selected) {
             selected = true;
-            parentController.getCategory(category, tr.translate(category));
+            parentController.getCategory(category);
         } else {
             selected = false;
             unselectedBackground();

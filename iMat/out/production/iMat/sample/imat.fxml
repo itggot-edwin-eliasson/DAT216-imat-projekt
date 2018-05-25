@@ -311,10 +311,14 @@
                                           <AnchorPane fx:id="orderConfirmed" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
                                              <children>
                                                 <Label alignment="CENTER" layoutX="135.0" layoutY="386.0" prefHeight="107.0" prefWidth="441.0" styleClass="page-title" text="Tack för din beställning!" textAlignment="CENTER" wrapText="true" />
-                                                <Button layoutX="235.0" layoutY="554.0" mnemonicParsing="false" onAction="#toStore" prefHeight="62.0" prefWidth="237.0" styleClass="back-button" text="Tillbaka till butik">
+                                                <Button layoutX="235.0" layoutY="594.0" mnemonicParsing="false" onAction="#toStore" prefHeight="62.0" prefWidth="237.0" text="Tillbaka till butik">
                                                    <font>
                                                       <Font size="18.0" />
-                                                   </font></Button>
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="back-button" />
+                                                      <String fx:value="product-title" />
+                                                   </styleClass></Button>
                                                 <AnchorPane layoutY="2.0" prefHeight="357.0" prefWidth="693.0" styleClass="purchased-confirmed">
                                                    <children>
                                                       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="269.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
@@ -324,7 +328,7 @@
                                                       </ImageView>
                                                    </children>
                                                 </AnchorPane>
-                                                <Label fx:id="confirmedTimeLabel" layoutX="266.0" layoutY="464.0" text="Din order levereras:" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" />
+                                                <Label fx:id="confirmedTimeLabel" layoutX="242.0" layoutY="464.0" styleClass="product-title" text="Din order levereras:" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" />
                                              </children>
                                           </AnchorPane>
                                        </children>

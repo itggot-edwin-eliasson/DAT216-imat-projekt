@@ -128,13 +128,16 @@ public class Controller implements Initializable {
             productListItemMap.put(product.getName(), item);
         }
 
+        categoryListItemMap.put("Alla", new CategoryListItem(("Alla"), this));
+
         for(ProductCategory p : pc){
-            CategoryListItem item = new CategoryListItem(p, this);
+            CategoryListItem item = new CategoryListItem(tr.translate(p), this);
             categoryListItemMap.put(tr.translate(p), item);
         }
 
         updateProductList();
         updateFavoritesList();
+        updateShoppingList();
         setCategory();
         setNavMenu();
         textFieldSetup();
@@ -170,8 +173,10 @@ public class Controller implements Initializable {
     private void setCategory() {
         categoryMenu.getChildren().clear();
         CategoryListItem item;
-        for(int i = 0; i < pc.length; i++){
-            item = categoryListItemMap.get(tr.translate(pc[i]));
+        categoryMenu.getChildren().add(categoryListItemMap.get("Alla"));
+        categoryListItemMap.get("Alla").unselectedBackground();
+        for(ProductCategory p : pc){
+            item = categoryListItemMap.get(tr.translate(p));
             item.unselectedBackground();
             categoryMenu.getChildren().add(item);
         }
@@ -218,6 +223,11 @@ public class Controller implements Initializable {
         }
         String s = String.format("%n%.2f", sc.getTotal()) + " kr";
         shoppingCartPrice.setText(s.substring(1));
+        if(sc.getItems().size() == 0){
+            toRegisterButton.setDisable(true);
+        } else {
+            toRegisterButton.setDisable(false);
+        }
     }
 
     private void updateFavoritesList(){
@@ -430,7 +440,7 @@ public class Controller implements Initializable {
     }
 
     private void setCardMonthComboBox(){
-        cardMonth.getItems().setAll("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
+        cardMonth.getItems().setAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
         cardMonth.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
@@ -619,11 +629,15 @@ public class Controller implements Initializable {
         emptyShoppingCartPane.toBack();
     }
 
-    public void getCategory(ProductCategory category, String categoryName){
+    public void getCategory(String categoryName){
         setCategory();
         categoryListItemMap.get(categoryName).selectedBackground();
         listView.toFront();
-        updateProductList(dh.getProducts(category));
+        if(categoryName.equals("Alla")){
+            updateProductList();
+        } else {
+            updateProductList(dh.getProducts(tr.translate(categoryName)));
+        }
         categoryTitle.setText("Vald kategori: " + categoryName);
     }
 
@@ -643,14 +657,17 @@ public class Controller implements Initializable {
             case "Favoriter":
                 favoritesPane.toFront();
                 updateFavoritesList();
+                setCategory();
                 break;
 
             case "Orderhistorik":
                 setOrderHistory();
+                setCategory();
                 storePane.toFront();
                 orderHistoryPane.toFront();
                 break;
             case "Hjälp":
+                setCategory();
                 helpPane.toFront();
                 break;
         }
@@ -679,6 +696,7 @@ public class Controller implements Initializable {
     @FXML
     private void toRegister(){
         if(sc.getItems().size() != 0 && dh.isCustomerComplete()) {
+            setCategory();
             firstNameField.setText(customer.getFirstName());
             surnameField.setText(customer.getLastName());
             streetField.setText(customer.getAddress());
@@ -687,6 +705,9 @@ public class Controller implements Initializable {
             phoneField.setText(customer.getPhoneNumber());
             mobilePhoneField.setText(customer.getMobilePhoneNumber());
             e_mailField.setText(customer.getEmail());
+            emptyCartButton.setDisable(true);
+            toRegisterButton.setDisable(true);
+            shoppingCartFlowPane.setDisable(true);
             registerPane.toFront();
         } else if(sc.getItems().size() != 0){
             registerPane.toFront();
@@ -695,9 +716,11 @@ public class Controller implements Initializable {
 
     @FXML
     private void toStore(){
-        emptyCartButton.setDisable(false);
-        toRegisterButton.setDisable(false);
-        shoppingCartFlowPane.setDisable(false);
+        if(sc.getItems().size() < 0){
+            emptyCartButton.setDisable(false);
+            toRegisterButton.setDisable(false);
+            shoppingCartFlowPane.setDisable(false);
+        }
         storePane.toFront();
         listView.toFront();
     }
@@ -714,6 +737,22 @@ public class Controller implements Initializable {
     @FXML
     private void toPayment(){
         if (dh.isCustomerComplete()) {
+            if(!creditCard.getCardType().equals("") && !creditCard.getHoldersName().equals("")
+                    && !creditCard.getCardNumber().equals("") && (creditCard.getVerificationCode() > 99)){
+                cardNumberField.setText(creditCard.getCardNumber());
+                cardHolderField.setText(creditCard.getHoldersName());
+                cardMonth.getSelectionModel().select(creditCard.getValidMonth() + "");
+                cardYear.getSelectionModel().select(creditCard.getValidYear() + "");
+                cvvField.setText(creditCard.getVerificationCode() + "");
+                cardType.getSelectionModel().select(creditCard.getCardType());
+            }else{
+                System.out.println(creditCard.getCardNumber());
+                System.out.println(creditCard.getCardType());
+                System.out.println(creditCard.getHoldersName());
+                System.out.println(creditCard.getVerificationCode());
+                System.out.println(creditCard.getValidMonth());
+                System.out.println(creditCard.getValidYear());
+            }
             paymentPane.toFront();
         } else {
             if (firstNameField.getText().isEmpty()) {
@@ -748,6 +787,9 @@ public class Controller implements Initializable {
 
     @FXML
     private void backFromRegister(){
+        emptyCartButton.setDisable(false);
+        toRegisterButton.setDisable(false);
+        shoppingCartFlowPane.setDisable(false);
         registerPane.toBack();
     }
 
@@ -823,8 +865,6 @@ public class Controller implements Initializable {
 
     @FXML
     private void backFromConfirm(){
-        toRegisterButton.setDisable(false);
-        emptyCartButton.setDisable(false);
         confirmPane.toBack();
     }
 
@@ -841,6 +881,11 @@ public class Controller implements Initializable {
     private void search(){
         updateProductList(dh.findProducts(search));
         listView.toFront();
+        if(!searchBarField.getText().isEmpty()) {
+            categoryTitle.setText("Resultat:");
+        } else{
+            categoryTitle.setText("Vald kategori: Alla");
+        }
     }
 
     @FXML

@@ -25,6 +25,7 @@ public class ProductListItem extends AnchorPane {
     @FXML private ImageView productImage;
     @FXML private TextField productAmount;
     @FXML private ImageView favoriteImage;
+    @FXML private ImageView ecoImage;
 
     public ProductListItem(Product product, Controller controller){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("product-listitem.fxml"));
@@ -52,8 +53,11 @@ public class ProductListItem extends AnchorPane {
             img = new Image(ProductListItem.class.getResourceAsStream("resources/baseline_favorite_border_black_18dp.png"));
             favoriteImage.setImage(img);
         }
+        if(product.isEcological()){
+            img = new Image(ProductListItem.class.getResourceAsStream("resources/leaf-png-6.png"));
+            ecoImage.setImage(img);
+        }
         setTextField();
-
     }
 
     public void setAmount(double amount){
