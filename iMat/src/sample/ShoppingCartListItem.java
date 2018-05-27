@@ -53,10 +53,9 @@ public class ShoppingCartListItem extends AnchorPane {
                     //focusgained - do nothing
                 } else{
                     if(!itemAmount.getText().isEmpty()) {
-                        shoppingItem.setAmount(Double.valueOf(itemAmount.getText().substring(0, 4).replaceAll(",", ".")));
+                        shoppingItem.setAmount(Double.valueOf(itemAmount.getText().replaceAll(",", ".")));
                     } else {
                         shoppingItem.setAmount(1.0);
-
                     }
                     String s = String.format("%n%.2f", shoppingItem.getTotal()) + "kr";
                     itemPrice.setText(s.substring(1));
@@ -102,11 +101,13 @@ public class ShoppingCartListItem extends AnchorPane {
     @FXML private void decAmount() {
         double amount = shoppingItem.getAmount();
         if (shoppingItem.getProduct().getUnitSuffix().equals("kg")) {
-            if (amount > 0.1)
+            if (amount > 0.11) {
                 amount -= 0.1;
+            }
         } else {
-            if (amount > 1)
+            if (amount > 1) {
                 amount -= 1;
+            }
         }
         shoppingItem.setAmount(amount);
         itemAmount.setText(String.format("%n%.2f", amount) + " " + shoppingItem.getProduct().getUnitSuffix());

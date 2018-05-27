@@ -643,6 +643,11 @@ public class Controller implements Initializable {
         setCategory();
         categoryListItemMap.get(categoryName).selectedBackground();
         listView.toFront();
+        emptyCartButton.setDisable(false);
+        if(sc.getItems().size() > 0) {
+            toRegisterButton.setDisable(false);
+        }
+        shoppingCartFlowPane.setDisable(false);
         if(categoryName.equals("Alla")){
             updateProductList();
         } else {
@@ -661,11 +666,21 @@ public class Controller implements Initializable {
             case "Startsida":
                 updateProductList();
                 setCategory();
+                emptyCartButton.setDisable(false);
+                if(sc.getItems().size() > 0) {
+                    toRegisterButton.setDisable(false);
+                }
+                shoppingCartFlowPane.setDisable(false);
                 categoryTitle.setText("Vald kategori: Alla");
                 startPane.toFront();
                 break;
             case "Favoriter":
                 favoritesPane.toFront();
+                emptyCartButton.setDisable(false);
+                if(sc.getItems().size() > 0) {
+                    toRegisterButton.setDisable(false);
+                }
+                shoppingCartFlowPane.setDisable(false);
                 updateFavoritesList();
                 setCategory();
                 break;
@@ -673,12 +688,22 @@ public class Controller implements Initializable {
             case "Orderhistorik":
                 setOrderHistory();
                 setCategory();
+                emptyCartButton.setDisable(false);
+                if(sc.getItems().size() > 0) {
+                    toRegisterButton.setDisable(false);
+                }
+                shoppingCartFlowPane.setDisable(false);
                 storePane.toFront();
                 orderHistoryPane.toFront();
                 break;
             case "Hjälp":
                 setCategory();
                 setHelpPane();
+                emptyCartButton.setDisable(false);
+                if(sc.getItems().size() > 0) {
+                    toRegisterButton.setDisable(false);
+                }
+                shoppingCartFlowPane.setDisable(false);
                 helpPane.toFront();
                 break;
         }
@@ -915,12 +940,14 @@ public class Controller implements Initializable {
     private void addFullOrderToShoppingCart(){
         List<ShoppingItem> items = tmpOrder.getItems();
         for(int i = 0; i < items.size(); i++){
-            for(int j = 0; j < sc.getItems().size(); j++) {
-                if (!items.get(i).getProduct().getName().equals(sc.getItems().get(j).getProduct().getName())) {
-                    sc.addItem(items.get(i));
-                } else {
-                    sc.getItems().get(j).setAmount(items.get(i).getAmount());
+            boolean check = false;
+            for(int j = 0; j < sc.getItems().size(); j++){
+                if(items.get(i).getProduct().getName().equals(sc.getItems().get(j).getProduct().getName())){
+                    check = true;
                 }
+            }
+            if(!check){
+                sc.addItem(items.get(i));
             }
         }
         updateShoppingList();

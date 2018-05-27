@@ -67,7 +67,7 @@ public class Translator {
                 categoryName = "Potatis och ris";
                 break;
             case ROOT_VEGETABLE:
-                categoryName = "Rootfrukter";
+                categoryName = "Rotfrukter";
                 break;
             case FRUIT:
                 categoryName = "Stenfrukter";
@@ -137,7 +137,7 @@ public class Translator {
             case "Potatis och ris":
                 categoryName = POTATO_RICE;
                 break;
-            case "Rootfrukter":
+            case "Rotfrukter":
                 categoryName = ROOT_VEGETABLE;
                 break;
             case "Stenfrukter":

@@ -41,7 +41,8 @@ public class OrderHistoryListItem extends AnchorPane {
         for(int i = 0; i < items.size(); i++){
             price += items.get(i).getTotal();
         }
-        orderPrice.setText(price + "");
+        String s = String.format("%n%.2f", price);
+        orderPrice.setText(s.substring(1));
     }
 
     @FXML

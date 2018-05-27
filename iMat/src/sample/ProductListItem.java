@@ -111,11 +111,13 @@ public class ProductListItem extends AnchorPane {
 
     @FXML private void decAmount() {
         if (product.getUnitSuffix().equals("kg")) {
-            if (amount > 0.1)
+            if (amount > 0.11) {
                 amount -= 0.1;
+            }
         } else {
-            if (amount > 1)
+            if (amount > 1) {
                 amount -= 1;
+            }
         }
         productAmount.setText(String.format("%n%.2f", amount));
     }
