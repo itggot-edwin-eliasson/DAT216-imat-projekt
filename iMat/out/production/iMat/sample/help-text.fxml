@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<fx:root prefHeight="5419.0" prefWidth="669.0" stylesheets="@style.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="50.0" layoutY="15.0" styleClass="product-title" text="Kontakta oss:" />
+      <Label layoutX="50.0" layoutY="55.0" text="Telefon: 0706-22 23 33" />
+      <Label layoutX="50.0" layoutY="89.0" text="Email: kontakt@imat.se" />
+      <Label layoutX="50.0" layoutY="134.0" styleClass="product-title" text="Kom igång:" />
+      <Label layoutX="50.0" layoutY="228.0" styleClass="product-title" text="1. Hitta varor" />
+      <Label layoutX="50.0" layoutY="184.0" text="Nedan följer 5 steg på hur man genomför ett köp på iMAT" />
+      <Label layoutX="50.0" layoutY="278.0" text="Det finns flera sätt att hitta de varor du vill köpa." />
+      <Label layoutX="50.0" layoutY="318.0" prefHeight="70.0" prefWidth="565.0" text="I listan till vänster finns flera varukategorier där du kan hitta önskad vara genom att klicka på varukategorin. Alla relaterade varor dyker då upp i mitten av skärmen." wrapText="true" />
+      <ImageView fitHeight="444.0" fitWidth="560.0" layoutX="50.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/CategoryExample.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="868.0" text="Du kan även söka efter önskad vara i sökrutan högst upp på sidan." />
+      <ImageView fitHeight="210.0" fitWidth="402.0" layoutX="50.0" layoutY="896.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Searchbar.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="970.0" styleClass="product-title" text="2. Lägg till vara i varukorg" />
+      <Label layoutX="50.0" layoutY="1027.0" prefHeight="69.0" prefWidth="601.0" text="När du hittat önskad vara lägger du till denna genom att klicka på knappen &quot;Lägg till i varukorg&quot;. Varan placeras då i varukorgen till höger." wrapText="true" />
+      <ImageView fitHeight="146.0" fitWidth="561.0" layoutX="50.0" layoutY="1114.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Product.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="1269.0" />
+      <ImageView fitHeight="406.0" fitWidth="166.0" layoutX="460.0" layoutY="1279.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Cart.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="1282.0" prefHeight="69.0" prefWidth="404.0" text="Vill man ändra mängden av produkter kan man klicka på &quot;-&quot; eller &quot;+&quot; i produktvyn eller i kassavyn." wrapText="true" />
+      <Label layoutX="50.0" layoutY="1430.0" prefHeight="71.0" prefWidth="402.0" text="Man kan även ta bort varan genom att klicka på &quot;Ta bort vara&quot;-knappen eller &quot;Töm hela varukorgen&quot;." wrapText="true" />
+      <Label layoutX="50.0" layoutY="1573.0" prefHeight="72.0" prefWidth="396.0" text="När du känner dig nöjd med din varukorg kan du ta dig vidare till kassan genom att klicka på &quot;Till kassan&quot;-knappen" wrapText="true" />
+      <Label layoutX="50.0" layoutY="1681.0" styleClass="product-title" text="3. Fyll i personuppgifter" />
+      <Label layoutX="50.0" layoutY="1733.0" prefHeight="65.0" prefWidth="540.0" text="När du klickat på &quot;Till kassan&quot;-knappen möts du av en sida där du anger dina personuppgifter och din adress." wrapText="true" />
+      <ImageView fitHeight="513.0" fitWidth="600.0" layoutX="50.0" layoutY="1801.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Personalinfo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="2337.0" prefHeight="49.0" prefWidth="530.0" text="När du fyllt i dina uppgifter går du vidare genom att klicka på knappen &quot;Fortsätt till betalning och leverans&quot;." wrapText="true" />
+      <Separator layoutX="50.0" layoutY="123.0" prefWidth="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Label layoutX="50.0" layoutY="2420.0" styleClass="product-title" text="4. Betalning och leverans" />
+      <Label layoutX="50.0" layoutY="2469.0" prefHeight="92.0" prefWidth="513.0" text="På denna sida anger man information för att kunna genomföra ett köp. För att välja korttyp klickar du på knappen &quot;Välj kort&quot; och ett flertal alternativ kommer visas upp. Samma sak gäller för år och månad." wrapText="true" />
+      <ImageView fitHeight="491.0" fitWidth="491.0" layoutX="50.0" layoutY="2577.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/BetalInfo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="3092.0" prefHeight="71.0" prefWidth="491.0" text="Här får du även välja när din order ska leveraras. Detta görs genom att klicka i de datum samt tidsalternativ som önskas." wrapText="true" />
+      <ImageView fitHeight="489.0" fitWidth="492.0" layoutX="50.0" layoutY="3177.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Date_and_time.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="3691.0" prefHeight="57.0" prefWidth="476.0" text="När alla fält är ifyllda, klicka på &quot;Fortsätt för att beställa&quot; för att se över din order." wrapText="true" />
+      <Label layoutX="50.0" layoutY="3775.0" styleClass="product-title" text="5. Bekräfta order" />
+      <Label layoutX="50.0" layoutY="3833.0" prefHeight="119.0" prefWidth="485.0" text="Här visas en översikt av den tidigare ifyllda informationen. Du kan alltså kontrollera att allt är korrekt. Stämmer inte informationen kan du enkelt gå tillbaka till tidigar steg genom att klicka på &quot;Tillbaka&quot;-knappen längst ner på sidan." wrapText="true" />
+      <ImageView fitHeight="494.0" fitWidth="995.0" layoutX="50.0" layoutY="3970.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/ConfirmOrder.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="4499.0" prefHeight="74.0" prefWidth="495.0" text="Om informationen stämmer kan du lägga din order genom att klicka på &quot;Bekräfta order&quot;-knappen och du möts då av följande skärm som förklarar att ditt köp är genomfört." wrapText="true" />
+      <ImageView fitHeight="497.0" fitWidth="813.0" layoutX="50.0" layoutY="4600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/OrderConfirmed.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="5138.0" prefHeight="93.0" prefWidth="513.0" text="Nu är introduktionen slut, för ytterligare information kontakta oss via informationen som finns högst upp. Annars kan du börja handla genom att klicka på nedanstående knapp." wrapText="true" />
+      <Button layoutX="227.0" layoutY="5281.0" mnemonicParsing="false" onAction="#toStore" prefHeight="66.0" prefWidth="205.0" text="Börja handla">
+         <styleClass>
+            <String fx:value="product-title" />
+            <String fx:value="back-button" />
+         </styleClass>
+      </Button>
+   </children>
+</fx:root>

@@ -62,6 +62,7 @@ public class Controller implements Initializable {
     @FXML private Button emptyCartButton;
     @FXML private Label categoryTitle;
     @FXML private AnchorPane startPane;
+    @FXML private FlowPane helpFlowPane;
 
     @FXML private TextField firstNameField;
     @FXML private TextField surnameField;
@@ -134,11 +135,11 @@ public class Controller implements Initializable {
             CategoryListItem item = new CategoryListItem(tr.translate(p), this);
             categoryListItemMap.put(tr.translate(p), item);
         }
-
         updateProductList();
         updateFavoritesList();
         updateShoppingList();
         setCategory();
+        setHelpPane();
         setNavMenu();
         textFieldSetup();
         setCardTypeComboBox();
@@ -180,6 +181,11 @@ public class Controller implements Initializable {
             item.unselectedBackground();
             categoryMenu.getChildren().add(item);
         }
+    }
+
+    protected void setHelpPane(){
+        helpFlowPane.getChildren().clear();
+        helpFlowPane.getChildren().add(new HelpText(this));
     }
 
     private void setNavMenu(){
@@ -613,6 +619,10 @@ public class Controller implements Initializable {
         shoppingCartPrice.setText(String.format("%n%.2f", sc.getTotal()) + " kr");
     }
 
+    public void store(){
+        toStore();
+    }
+
     @FXML
     private void removeFromShoppingCart(){
         deleteProductPane.toBack();
@@ -668,6 +678,7 @@ public class Controller implements Initializable {
                 break;
             case "Hjälp":
                 setCategory();
+                setHelpPane();
                 helpPane.toFront();
                 break;
         }
@@ -711,6 +722,9 @@ public class Controller implements Initializable {
             registerPane.toFront();
         } else if(sc.getItems().size() != 0){
             registerPane.toFront();
+            emptyCartButton.setDisable(true);
+            toRegisterButton.setDisable(true);
+            shoppingCartFlowPane.setDisable(true);
         }
     }
 

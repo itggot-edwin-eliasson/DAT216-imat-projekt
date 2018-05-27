@@ -117,15 +117,6 @@
                                                 </ScrollPane>
                                              </children>
                                           </AnchorPane>
-                                          <AnchorPane fx:id="helpPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
-                                             <children>
-                                                <Label layoutX="305.0" layoutY="31.0" styleClass="page-title" text="Hjälp">
-                                                   <font>
-                                                      <Font size="36.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </AnchorPane>
                                           <AnchorPane fx:id="orderHistoryPane" prefHeight="618.0" prefWidth="575.0" style="-fx-background-color: #ffffff;">
                                              <children>
                                                 <Label layoutX="246.0" layoutY="14.0" styleClass="page-title" text="Orderhistorik" />
@@ -167,64 +158,6 @@
                                                       <String fx:value="back-button" />
                                                    </styleClass>
                                                 </Button>
-                                             </children>
-                                          </AnchorPane>
-                                          <AnchorPane fx:id="paymentPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
-                                             <children>
-                                                <Label layoutX="284.0" layoutY="82.0" styleClass="page-title" text="Betalning" />
-                                                <Label layoutX="99.0" layoutY="293.0" text="Kortnummer:" />
-                                                <Label layoutX="99.0" layoutY="143.0" text="Kortägare:" />
-                                                <Label layoutX="99.0" layoutY="343.0" text="CVV:" />
-                                                <Label layoutX="99.0" layoutY="464.0" text="Datum:" />
-                                                <Label layoutX="99.0" layoutY="514.0" text="Tidsintervall:" />
-                                                <TextField fx:id="cardHolderField" layoutX="240.0" layoutY="138.0" prefHeight="35.0" prefWidth="248.0" />
-                                                <ComboBox fx:id="cardType" layoutX="240.0" layoutY="188.0" prefHeight="37.0" prefWidth="248.0" promptText="Välj korttyp" />
-                                                <ComboBox fx:id="cardMonth" layoutX="240.0" layoutY="238.0" prefHeight="35.0" prefWidth="129.0" promptText="Månad" />
-                                                <ComboBox fx:id="cardYear" layoutX="376.0" layoutY="238.0" prefHeight="35.0" prefWidth="110.0" promptText="År" />
-                                                <TextField fx:id="cardNumberField" layoutX="240.0" layoutY="288.0" prefHeight="35.0" prefWidth="247.0" />
-                                                <TextField fx:id="cvvField" layoutX="240.0" layoutY="338.0" prefHeight="27.0" prefWidth="55.0" />
-                                                <DatePicker fx:id="date" layoutX="240.0" layoutY="459.0" prefHeight="35.0" prefWidth="229.0" promptText="Klicka i datum" />
-                                                <Label layoutX="99.0" layoutY="193.0" text="Kortyp:" />
-                                                <Label layoutX="99.0" layoutY="243.0" text="Label:" />
-                                                <Label layoutX="289.0" layoutY="408.0" styleClass="page-title" text="Leverans" />
-                                                <CheckBox fx:id="timeAllDay" layoutX="240.0" layoutY="514.0" mnemonicParsing="false" text="Hela dagen">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font></CheckBox>
-                                                <CheckBox fx:id="timeEight" layoutX="240.0" layoutY="541.0" mnemonicParsing="false" text="08.00 - 12.00">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font></CheckBox>
-                                                <CheckBox fx:id="timeOne" layoutX="240.0" layoutY="568.0" mnemonicParsing="false" text="12.00 - 16.00">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font></CheckBox>
-                                                <CheckBox fx:id="timeFour" layoutX="240.0" layoutY="595.0" mnemonicParsing="false" text="16.00 -20.00">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font></CheckBox>
-                                                <Label fx:id="cardHolderErrorMessage" layoutX="506.0" layoutY="143.0" styleClass="error-message" />
-                                                <Label fx:id="cardTypeErrorMessage" layoutX="506.0" layoutY="193.0" styleClass="error-message" />
-                                                <Label fx:id="dateErrorMessage" layoutX="506.0" layoutY="243.0" styleClass="error-message" />
-                                                <Label fx:id="cardNumberErrorMessage" layoutX="506.0" layoutY="293.0" styleClass="error-message" />
-                                                <Label fx:id="cvvErrorMessage" layoutX="506.0" layoutY="343.0" styleClass="error-message" />
-                                                <Label fx:id="deliveryDateErrorMessage" layoutX="506.0" layoutY="464.0" styleClass="error-message" />
-                                                <Label fx:id="deliveryTimeErrorMessage" layoutX="506.0" layoutY="514.0" styleClass="error-message" />
-                                                <Button layoutX="420.0" layoutY="608.0" mnemonicParsing="false" onAction="#toConfirm" prefHeight="62.0" prefWidth="190.0" styleClass="back-button" text="Fortsätt för att beställa" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="76.0" />
-                                                <Button layoutX="58.0" layoutY="619.0" mnemonicParsing="false" onAction="#backFromPayment" styleClass="back-button" text="Tillbaka" />
-                                                <Label layoutX="37.0" layoutY="40.0" text="Kunduppgifter" />
-                                                <Label layoutX="244.0" layoutY="40.0" styleClass="wizard-selected" text="Betalning och leverans" />
-                                                <Label layoutX="546.0" layoutY="40.0" text="Bekräfta order" />
-                                                <ImageView fitHeight="28.0" fitWidth="31.0" layoutX="186.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@resources/outline_arrow_forward_black_36dp.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <ImageView fitHeight="28.0" fitWidth="31.0" layoutX="499.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@resources/outline_arrow_forward_black_36dp.png" />
-                                                   </image>
-                                                </ImageView>
                                              </children>
                                           </AnchorPane>
                                           <AnchorPane fx:id="registerPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
@@ -329,6 +262,78 @@
                                                    </children>
                                                 </AnchorPane>
                                                 <Label fx:id="confirmedTimeLabel" layoutX="242.0" layoutY="464.0" styleClass="product-title" text="Din order levereras:" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="paymentPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Label layoutX="284.0" layoutY="82.0" styleClass="page-title" text="Betalning" />
+                                                <Label layoutX="99.0" layoutY="293.0" text="Kortnummer:" />
+                                                <Label layoutX="99.0" layoutY="143.0" text="Kortägare:" />
+                                                <Label layoutX="99.0" layoutY="343.0" text="CVV:" />
+                                                <Label layoutX="99.0" layoutY="464.0" text="Datum:" />
+                                                <Label layoutX="99.0" layoutY="514.0" text="Tidsintervall:" />
+                                                <TextField fx:id="cardHolderField" layoutX="240.0" layoutY="138.0" prefHeight="35.0" prefWidth="248.0" />
+                                                <ComboBox fx:id="cardType" layoutX="240.0" layoutY="188.0" prefHeight="37.0" prefWidth="248.0" promptText="Välj korttyp" />
+                                                <ComboBox fx:id="cardMonth" layoutX="240.0" layoutY="238.0" prefHeight="35.0" prefWidth="129.0" promptText="Månad" />
+                                                <ComboBox fx:id="cardYear" layoutX="376.0" layoutY="238.0" prefHeight="35.0" prefWidth="110.0" promptText="År" />
+                                                <TextField fx:id="cardNumberField" layoutX="240.0" layoutY="288.0" prefHeight="35.0" prefWidth="247.0" />
+                                                <TextField fx:id="cvvField" layoutX="240.0" layoutY="338.0" prefHeight="27.0" prefWidth="55.0" />
+                                                <DatePicker fx:id="date" layoutX="240.0" layoutY="459.0" prefHeight="35.0" prefWidth="229.0" promptText="Klicka i datum" />
+                                                <Label layoutX="99.0" layoutY="193.0" text="Kortyp:" />
+                                                <Label layoutX="99.0" layoutY="243.0" text="Månad / År:" />
+                                                <Label layoutX="289.0" layoutY="408.0" styleClass="page-title" text="Leverans" />
+                                                <CheckBox fx:id="timeAllDay" layoutX="240.0" layoutY="514.0" mnemonicParsing="false" text="Hela dagen">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></CheckBox>
+                                                <CheckBox fx:id="timeEight" layoutX="240.0" layoutY="541.0" mnemonicParsing="false" text="08.00 - 12.00">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></CheckBox>
+                                                <CheckBox fx:id="timeOne" layoutX="240.0" layoutY="568.0" mnemonicParsing="false" text="12.00 - 16.00">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></CheckBox>
+                                                <CheckBox fx:id="timeFour" layoutX="240.0" layoutY="595.0" mnemonicParsing="false" text="16.00 -20.00">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font></CheckBox>
+                                                <Label fx:id="cardHolderErrorMessage" layoutX="506.0" layoutY="143.0" styleClass="error-message" />
+                                                <Label fx:id="cardTypeErrorMessage" layoutX="506.0" layoutY="193.0" styleClass="error-message" />
+                                                <Label fx:id="dateErrorMessage" layoutX="506.0" layoutY="243.0" styleClass="error-message" />
+                                                <Label fx:id="cardNumberErrorMessage" layoutX="506.0" layoutY="293.0" styleClass="error-message" />
+                                                <Label fx:id="cvvErrorMessage" layoutX="506.0" layoutY="343.0" styleClass="error-message" />
+                                                <Label fx:id="deliveryDateErrorMessage" layoutX="506.0" layoutY="464.0" styleClass="error-message" />
+                                                <Label fx:id="deliveryTimeErrorMessage" layoutX="506.0" layoutY="514.0" styleClass="error-message" />
+                                                <Button layoutX="420.0" layoutY="608.0" mnemonicParsing="false" onAction="#toConfirm" prefHeight="62.0" prefWidth="190.0" styleClass="back-button" text="Fortsätt för att beställa" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="76.0" />
+                                                <Button layoutX="58.0" layoutY="619.0" mnemonicParsing="false" onAction="#backFromPayment" styleClass="back-button" text="Tillbaka" />
+                                                <Label layoutX="37.0" layoutY="40.0" text="Kunduppgifter" />
+                                                <Label layoutX="244.0" layoutY="40.0" styleClass="wizard-selected" text="Betalning och leverans" />
+                                                <Label layoutX="546.0" layoutY="40.0" text="Bekräfta order" />
+                                                <ImageView fitHeight="28.0" fitWidth="31.0" layoutX="186.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@resources/outline_arrow_forward_black_36dp.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <ImageView fitHeight="28.0" fitWidth="31.0" layoutX="499.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@resources/outline_arrow_forward_black_36dp.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane fx:id="helpPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                                             <children>
+                                                <Label layoutX="305.0" layoutY="31.0" styleClass="page-title" text="Hjälp">
+                                                   <font>
+                                                      <Font size="36.0" />
+                                                   </font>
+                                                </Label>
+                                                <ScrollPane hbarPolicy="NEVER" layoutX="1.0" layoutY="93.0" prefHeight="627.0" prefWidth="692.0">
+                                                   <content>
+                                                      <FlowPane fx:id="helpFlowPane" prefHeight="617.0" prefWidth="602.0" />
+                                                   </content>
+                                                </ScrollPane>
                                              </children>
                                           </AnchorPane>
                                        </children>
